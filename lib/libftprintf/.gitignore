@@ -1,0 +1,6 @@
+*.a
+.vscode
+obj
+bin
+.git
+test.c
