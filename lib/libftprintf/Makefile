@@ -1,6 +1,6 @@
-CFLAGS=-Wall -Wextra -Werror -Iinclude -I. -c
-NAME=libftprintf.a
-LIBFT_FILES=\
+CFLAGS?=-Wall -Wextra -Werror -Iinclude -I. -c
+NAME:=libftprintf.a
+LIBFT_FILES:=\
 	libft/ft_atoi.o\
 	libft/ft_bzero.o\
 	libft/ft_calloc.o\
@@ -45,7 +45,7 @@ LIBFT_FILES=\
 	libft/ft_lstnew_bonus.o\
 	libft/ft_lstsize_bonus.o\
 
-FILES=\
+FILES:=\
 	ft_printf\
 	ft_printf_handlers\
 	ft_printf_handler_decimal\
@@ -58,9 +58,9 @@ FILES=\
 	ft_utoa_base\
 	ft_strjoin_free\
 
-SRC_DIR=src
-OBJ_DIR=obj
-OBJ_FILES=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
+SRC_DIR:=src
+OBJ_DIR:=obj
+OBJ_FILES:=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
 
 .PHONY: all clean fclean re bonus t tclean debug tt
 

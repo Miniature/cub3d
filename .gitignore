@@ -3,9 +3,11 @@
 
 #generated on build
 *.a
+*.o
+*.dylib
+*.dSYM
 obj/
 bin/
 
 #project specific
-resources/input
-push_swap
+so_long

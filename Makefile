@@ -1,7 +1,11 @@
-CFLAGS:=-Wall -Wextra -Werror -c -I. -Iinclude
+#cflags handled this way because mlx is kinda shit/old and doesnt compile with werror
+#SELFCFLAGS:=-Wall -Wextra -Werror -c -I. -Iinclude
+#SELFCFLAGS+=$(CFLAGS)
+CFLAGS?=-Wall -Wextra -Werror -c -I. -Iinclude
 export CFLAGS
 NAME:=so_long
 FILES:=\
+	main\
 
 SRC_DIR:=src
 OBJ_DIR:=obj
@@ -9,19 +13,20 @@ OBJ_FILES:=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
 
 LIBS:=\
 	libftprintf\
-	libmlx\
+
+MLX:=lib/libmlx
 
 LIBS:=$(addsuffix .a, $(addprefix lib/, $(join $(LIBS), $(addprefix /, $(LIBS)))))
 
 .PHONY: all clean fclean re bonus debug
 
-all: $(NAME)
+all: debug
 
 debug: CFLAGS+=-g
-debug: all
+debug: $(NAME)
 
-$(NAME):$(LIBS) $(OBJ_FILES)
-	cc -o $(NAME) $(OBJ_FILES) $(LIBS)
+$(NAME):$(LIBS) $(OBJ_FILES) libmlx.dylib
+	cc -o $(NAME) $(OBJ_FILES) $(LIBS) libmlx.dylib
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
@@ -30,12 +35,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBS):
 	$(MAKE) -C $(dir $@)
 
+libmlx.dylib:
+	$(MAKE) -C $(MLX)
+	cp -R $(MLX)/libmlx.dylib* .
+
 clean:
 	rm -rf obj
 	$(foreach lib, $(LIBS), $(shell $(MAKE) -C $(dir $(lib)) clean))
+	$(MAKE) -C $(MLX) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf libmlx.dylib*
 
 re: fclean all
 

@@ -1,4 +1,5 @@
-CFLAGS=-Wall -Wextra -Werror -c
+#CFLAGS?=-Wall -Wextra -Werror -c
+CFLAGS?=-Wall -Wextra -Werror -c
 NAME=libft.a
 
 FILES=\
