@@ -1,6 +1,3 @@
-#cflags handled this way because mlx is kinda shit/old and doesnt compile with werror
-#SELFCFLAGS:=-Wall -Wextra -Werror -c -I. -Iinclude
-#SELFCFLAGS+=$(CFLAGS)
 CFLAGS?=-Wall -Wextra -Werror -c -I. -Iinclude
 export CFLAGS
 NAME:=so_long
@@ -13,6 +10,7 @@ OBJ_FILES:=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
 
 LIBS:=\
 	libftprintf\
+	get_next_line\
 
 MLX:=lib/libmlx
 
