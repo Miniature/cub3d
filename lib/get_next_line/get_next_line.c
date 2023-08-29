@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:51:50 by wdavey            #+#    #+#             */
-/*   Updated: 2023/07/19 16:44:15 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:28:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char				*ft_strnstr(const char *h, const char *n, size_t len);
 char				*ft_substr(const char *s, size_t start, size_t len);
 char				*ft_strjoin_free(char *s1, char *s2);
 
-void	clear_buffer(char *buffer, ssize_t buf_len)
+static void	clear_buffer(char *buffer, ssize_t buf_len)
 {
 	if (0 > buf_len)
 		return ;
@@ -28,7 +28,7 @@ void	clear_buffer(char *buffer, ssize_t buf_len)
 	}
 }
 
-ssize_t	read_next(int fd, char *buf)
+static ssize_t	read_next(int fd, char *buf)
 {
 	int	a;
 
@@ -42,7 +42,7 @@ ssize_t	read_next(int fd, char *buf)
 	return (a);
 }
 
-size_t	find_start(int fd, char	*buffer)
+static size_t	find_start(int fd, char	*buffer)
 {
 	size_t	start;
 
@@ -57,7 +57,7 @@ size_t	find_start(int fd, char	*buffer)
 	return (start);
 }
 
-char	*ft_free(char **p)
+char	*f_gnl_free(char **p)
 {
 	if (NULL != *p)
 		free(*p);

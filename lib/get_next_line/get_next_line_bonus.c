@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:51:50 by wdavey            #+#    #+#             */
-/*   Updated: 2023/07/21 12:11:27 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:33:26 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <unistd.h>
 #include <limits.h>
 
-char				*ft_strnstr(const char *h, const char *n, size_t len);
-char				*ft_substr(const char *s, size_t start, size_t len);
-char				*ft_strjoin_f(char *s1, char *s2);
+char				*gnl_strnstr(const char *h, const char *n, size_t len);
+char				*gnl_substr(const char *s, size_t start, size_t len);
+char				*gnl_strjoin_f(char *s1, char *s2);
 
 //zeroes buffer
 static void	clear_buffer(char *buffer, ssize_t buf_len)
@@ -50,7 +50,7 @@ static ssize_t	read_next(int fd, char *buf)
 
 //returns index of first non-null character in buffer or -1 on error
 //if not initially found tries reading once
-ssize_t	find_start(int fd, char	*buffer, size_t buf_size)
+static ssize_t	find_start(int fd, char	*buffer, size_t buf_size)
 {
 	size_t	start;
 	ssize_t	read_value;
@@ -81,7 +81,7 @@ typedef struct s_fd_buffer {
 }	t_fd_buffer;
 
 //returns buffer used for fd
-char	*get_fd_buffer(int fd)
+static char	*get_fd_buffer(int fd)
 {
 	static t_fd_buffer	bufs[BUFFER_COUNT];
 	size_t				i_bufs;
@@ -118,10 +118,10 @@ char	*get_next_line(int fd)
 	if (-1 == v.s || '\0' == v.b[v.s])
 		return (NULL);
 	v.rv = NULL;
-	v.nlp = ft_strnstr(v.b + v.s, "\n", BUFFER_SIZE - v.s);
+	v.nlp = gnl_strnstr(v.b + v.s, "\n", BUFFER_SIZE - v.s);
 	while (NULL == v.nlp)
 	{
-		v.rv = ft_strjoin_f(v.rv, ft_substr(v.b + v.s, 0, BUF_SIZ - v.s + 1));
+		v.rv = gnl_strjoin_f(v.rv, gnl_substr(v.b + v.s, 0, BUF_SIZ - v.s + 1));
 		v.read_value = read_next(fd, v.b);
 		v.s = 0;
 		if (0 == v.read_value)
@@ -131,9 +131,9 @@ char	*get_next_line(int fd)
 			free(v.rv);
 			return (NULL);
 		}
-		v.nlp = ft_strnstr(v.b, "\n", BUFFER_SIZE);
+		v.nlp = gnl_strnstr(v.b, "\n", BUFFER_SIZE);
 	}
-	v.rv = ft_strjoin_f(v.rv, ft_substr(v.b + v.s, 0, v.nlp - v.b - v.s + 1));
+	v.rv = gnl_strjoin_f(v.rv, gnl_substr(v.b + v.s, 0, v.nlp - v.b - v.s + 1));
 	clear_buffer(v.b, (v.nlp - v.b) + 1);
 	return (v.rv);
 }

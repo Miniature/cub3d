@@ -6,16 +6,16 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:32:37 by wdavey            #+#    #+#             */
-/*   Updated: 2023/07/19 16:36:02 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:27:46 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-char	*ft_free(char **p);
+char	*ft_gnl_free(char **p);
 
-size_t	ft_strlen(const char *s)
+size_t	ft_gnl_strlen(const char *s)
 {
 	size_t	len;
 
@@ -27,7 +27,8 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_gnl_strlcat(char *restrict dst,
+	const char *restrict src, size_t dstsize)
 {
 	size_t	i;
 
@@ -35,7 +36,7 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	while (i < dstsize && dst[i] != '\0')
 		i++;
 	if (i == dstsize)
-		return (i + ft_strlen(src));
+		return (i + ft_gnl_strlen(src));
 	while (i < dstsize - 1 && *src != '\0')
 	{
 		dst[i] = *src;
@@ -51,13 +52,13 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	return (i);
 }
 
-char	*ft_substr(const char *s, size_t start, size_t len)
+char	*ft_gnl_substr(const char *s, size_t start, size_t len)
 {
 	char	*substr;
 
 	if (NULL == s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start > ft_gnl_strlen(s))
 	{
 		substr = malloc(1);
 		if (NULL == substr)
@@ -65,8 +66,8 @@ char	*ft_substr(const char *s, size_t start, size_t len)
 		*substr = '\0';
 		return (substr);
 	}
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
+	if (len > ft_gnl_strlen(s + start))
+		len = ft_gnl_strlen(s + start);
 	substr = malloc((len + 1) * sizeof(*substr));
 	if (NULL == substr)
 		return (NULL);
@@ -78,25 +79,25 @@ char	*ft_substr(const char *s, size_t start, size_t len)
 	return (substr);
 }
 
-char	*ft_strjoin_free(char *s1, char *s2)
+char	*ft_gnl_strjoin_free(char *s1, char *s2)
 {
 	char	*joined;
 	int		len;
 
 	if (NULL == s1 && NULL == s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	len = ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1;
 	joined = malloc (len * sizeof(*joined));
 	if (NULL == joined)
 	{
-		ft_free(&s1);
-		ft_free(&s2);
+		ft_gnl_free(&s1);
+		ft_gnl_free(&s2);
 		return (NULL);
 	}
 	joined[0] = '\0';
 	if (NULL != s1)
 	{
-		ft_strlcat(joined, s1, len);
+		ft_gnl_strlcat(joined, s1, len);
 		free(s1);
 	}
 	if (NULL != s2)
@@ -107,7 +108,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (joined);
 }
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_gnl_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 

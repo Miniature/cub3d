@@ -1,27 +1,31 @@
-CFLAGS?=-Wall -Wextra -Werror -Iinclude -I. -c
-NAME:=get_next_line.a
+#CFLAGS?=-Wall -Wextra -Werror -c
+CFLAGS?=-Wall -Wextra -Werror -c
+NAME=get_next_line.a
 
-FILES:=\
-	get_next_line_bonus\
-	get_next_line_utils_bonus\
+FILES=\
+	get_next_line_bonus.o\
+	get_next_line_utils_bonus.o\
 
-OBJ:=$(addsuffix .o, $(FILES))
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re debug
 
 all: $(NAME)
 
 debug: CFLAGS+=-g
 debug: all
 
-$(NAME):$(LIBFT_FILES) $(OBJ)
-	ar rcs $(NAME) $(OBJ) $(LIBFT_FILES)
+$(NAME): $(FILES)
+	ar rcs $(NAME) $(FILES)
 
-%.o: %.c
+%.o:%.c
 	cc $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f *.o
+	rm -f $(FILES) $(BONUS)
+
+fclean: clean
 	rm -f $(NAME)
 
-re: clean all
+re: fclean all
+
+bonus:	$(FILES) $(BONUS)
+	ar rcs $(NAME) $(FILES) $(BONUS)
