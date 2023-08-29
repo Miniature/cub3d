@@ -16,6 +16,8 @@ NAME=libmlx.dylib
 INC=-I.
 #OPTI=-Ounchecked
 
+OPTI+=-g
+
 all: $(NAME)
 
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
@@ -32,4 +34,3 @@ $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 clean:
 	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *.swiftsourceinfo *~
 	rm -rf $(NAME).dSYM
-
