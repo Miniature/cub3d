@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 11:36:55 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/08/31 12:52:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 #include "mlxw.h"
 #include "slmap.h"
 #include "gamestate.h"
+#include "entity.h"
+
+typedef struct s_gamewindow {
+	t_mlx_window	win;
+	t_gamestate		game;
+}	t_gamewindow;
 
 int	error(char *msg)
 {
@@ -27,8 +33,19 @@ int	error(char *msg)
 	return (1);
 }
 
-int	sl_close(void)
+static int	close(t_gamewindow *gw)
 {
+	t_list	*entities;
+
+	entities = gw->game.entities;
+	while (NULL != entities)
+	{
+		entity_destroy(*(t_entity *)(entities->content), gw->win);
+		entities = entities->next;
+	}
+	ft_lstclear(&entities, free);
+	mlxw_destroy_image(gw->game.terrain, gw->win.mlx);
+	slmap_delete(gw->game.map);
 	exit(0);
 	return (0);
 }
@@ -47,21 +64,19 @@ char	*get_rsc_path(const char *exe_path)
 
 int	main(int argc, char **argv)
 {
-	t_mlx_window	window;
-	t_slmap			map;
-	t_gamestate		state;
+	t_gamewindow	gw;
 	char			*rsc_path;
 
 	if (2 != argc)
 		error("incorrect args (expected only path to map)");
-	map = slmap_load(argv[1]);
 	rsc_path = get_rsc_path(argv[0]);
-	window.mlx = mlx_init();
-	window.win = mlx_new_window(window.mlx, map.width * 32, map.height * 32,
-			"window");
-	state = gamestate_init(window, map, rsc_path);
-	gamestate_render(state, window);
-	mlx_hook(window.win, 17, 0, sl_close, NULL);
-	mlx_loop(window.mlx);
+	gw.game.map = slmap_load(argv[1]);
+	gw.win.mlx = mlx_init();
+	gw.win.win = mlx_new_window(gw.win.mlx, gw.game.map.width * 32,
+			gw.game.map.height * 32, "so_long");
+	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
+	gamestate_render(gw.game, gw.win);
+	mlx_hook(gw.win.win, 17, 0, close, &gw);
+	mlx_loop(gw.win.mlx);
 	return (0);
 }

@@ -3,6 +3,7 @@ export CFLAGS
 NAME:=so_long
 FILES:=\
 	entity/entity_create\
+	entity/entity_destroy\
 	entity/entity_draw\
 	gamestate/gamestate_init_entities\
 	gamestate/gamestate_init_terrain\
