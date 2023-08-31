@@ -21,20 +21,20 @@ FILES:=\
 	sprite/sprite_load\
 	sprite/sprite_draw\
 	utils/pos_equal\
-	utils/pos\
+	utils/pos_new\
 	main\
 
 SRC_DIR:=src
 OBJ_DIR:=obj
 OBJ_FILES:=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
 
-LIBS:=\
+SLIBS:=\
 	libftprintf\
 	get_next_line\
 
 MLX:=lib/libmlx
 
-LIBS:=$(addsuffix .a, $(addprefix lib/, $(join $(LIBS), $(addprefix /, $(LIBS)))))
+SLIBS:=$(addsuffix .a, $(addprefix lib/, $(join $(SLIBS), $(addprefix /, $(SLIBS)))))
 
 .PHONY: all clean fclean re bonus debug
 
@@ -43,8 +43,8 @@ all: debug
 debug: CFLAGS+=-g
 debug: $(NAME)
 
-$(NAME):$(LIBS) $(OBJ_FILES) libmlx.dylib
-	cc -o $(NAME) $(OBJ_FILES) $(LIBS) libmlx.dylib
+$(NAME):$(SLIBS) $(OBJ_FILES) libmlx.dylib
+	cc -o $(NAME) $(OBJ_FILES) $(SLIBS) libmlx.dylib
 	install_name_tool -change libmlx.dylib @executable_path/libmlx.dylib $(NAME)
 #i hate macs
 
@@ -52,7 +52,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(dir $@)
 	cc $(CFLAGS) -o $@ $<
 
-$(LIBS):
+$(SLIBS):
 	$(MAKE) -C $(dir $@)
 
 libmlx.dylib:
@@ -61,7 +61,7 @@ libmlx.dylib:
 
 clean:
 	rm -rf obj
-	$(foreach lib, $(LIBS), $(shell $(MAKE) -C $(dir $(lib)) clean))
+	$(foreach lib, $(SLIBS), $(shell $(MAKE) -C $(dir $(lib)) clean))
 	$(MAKE) -C $(MLX) clean
 
 fclean: clean
