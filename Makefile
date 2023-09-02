@@ -71,7 +71,8 @@ debug: $(NAME)
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
 	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
-	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(dylib) $(NAME)$(NEWLINE))
+	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)
+	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(notdir $(dylib)) $(NAME)$(NEWLINE))
 #i hate macs
 
 -include $(OBJ_FILES:.o=.d)
@@ -88,10 +89,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	rm -rf obj
-	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) clean$(NEWLINE))
+	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) fclean clean$(NEWLINE))
+	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
 
 fclean: clean
-	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
-	rm -f $(NAME)
+	rm -f $(NAME) $(notdir $(DYLIBPATHS))
 
 re: fclean all

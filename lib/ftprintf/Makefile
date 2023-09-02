@@ -78,8 +78,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	rm -rf obj
-	rm -f $(LIBFT_FILES)
-	rm -f $(NAME)
+	rm -f $(LIBFT_FILES) $(NAME) libft/*.d
 
 re: clean all
 

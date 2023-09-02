@@ -1,5 +1,5 @@
 #CFLAGS?=-Wall -Wextra -Werror -c
-CFLAGS?=-Wall -Wextra -Werror -c
+CFLAGS+=-Wall -Wextra -Werror -c
 NAME=libft.a
 
 FILES=\
@@ -71,4 +71,4 @@ fclean: clean
 re: fclean all
 
 bonus:	$(FILES) $(BONUS)
-	ar rcs $(NAME) $(FILES) $(BONUS)
+	ar rcs $(NAME) $(FILES) $(BONUS) *.d

@@ -4,6 +4,7 @@
 #generated on build
 *.a
 *.o
+*.d
 *.dylib
 *.dSYM
 obj/
