@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:43:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 11:30:17 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/02 13:17:43 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ t_mlx_image	gamestate_init_terrain(t_mlx_window window,
 	p = pos_new(0, 0);
 	terrain[1] = sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");
 	terrain[0] = sprite_load(window.mlx, rsc_path, "floor.xpm");
-	while (p.y < map.height)
+	while ((unsigned)p.y < map.height)
 	{
 		p.x = 0;
-		while (p.x < map.width)
+		while ((unsigned)p.x < map.width)
 		{
 			mlxw_image_overlay(image,
 				terrain[WALL_CHAR == map.raw[p.y][p.x]].frames[0],
-				pos_new(p.x * 32, p.y * 32));
+				pos_new(p.x * 32 + 1, p.y * 32 + 1));
 			p.x++;
 		}
 		p.y++;
 	}
-	sprite_delete(terrain[1], window.mlx);
-	sprite_delete(terrain[0], window.mlx);
+	sprite_delete(terrain + 1, window.mlx);
+	sprite_delete(terrain, window.mlx);
 	return (image);
 }

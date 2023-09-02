@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 12:46:31 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/02 12:30:26 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@ typedef struct s_entity {
 	enum e_id	type;
 	t_pos		pos;
 	t_sprite	*sprite;
+	long		data;
 }	t_entity;
 
 t_entity	entity_create(enum e_id id, int x, int y, t_sprite *sprite);
+t_entity	*entity_get_copy(enum e_id id, void *mlx,
+				char *rsc_path, t_pos pos);
 void		entity_destroy(t_entity e, t_mlx_window win);
 
 void		entity_draw(t_entity e, t_mlx_window w);
+
+enum e_id	e_id_from_char(char c);
 
 #endif

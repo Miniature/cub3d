@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   e_id_from_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 14:20:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/07/19 16:43:43 by wdavey           ###   ########.fr       */
+/*   Created: 2023/09/02 12:28:12 by wdavey            #+#    #+#             */
+/*   Updated: 2023/09/02 12:30:45 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include "entity.h"
+#include "slmap.h"
 
-# ifdef BUFFER_SIZE
-#  if BUFFER_SIZE < 1
-#   error BUFFER_SIZE is less than 1
-#  endif
-# else
-#  define BUFFER_SIZE 1028
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+enum e_id	e_id_from_char(char c)
+{
+	if (c == PLAYER_CHAR)
+		return (PLAYER_ID);
+	if (c == PATROL_CHAR)
+		return (PATROL_ID);
+	if (c == COLLECTIBLE_CHAR)
+		return (COLLECTIBLE_ID);
+	if (c == EXIT_CHAR)
+		return (EXIT_ID);
+	return (INVALID_ID);
+}

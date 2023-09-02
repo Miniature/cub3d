@@ -1,6 +1,0 @@
-*.o
-Makefile.m
-test.c
-tests
-gnl_test
-.vscode

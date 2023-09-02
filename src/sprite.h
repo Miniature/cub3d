@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:45:33 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/30 14:50:57 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/02 13:00:17 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ typedef struct s_sprite {
 }	t_sprite;
 
 t_sprite	sprite_load(void *mlx, const char *rsc_path, const char *name);
-void		sprite_delete(t_sprite sprite, void *mlx);
+void		sprite_delete(t_sprite *sprite, void *mlx);
 
 void		sprite_draw(t_sprite sprite, t_mlx_window win, t_pos pos);
+
+char		*sprite_name_from_eid(int id);
 
 #endif

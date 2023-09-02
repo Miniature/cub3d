@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_delete.c                                    :+:      :+:    :+:   */
+/*   patrol_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:46:25 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 12:39:19 by wdavey           ###   ########.fr       */
+/*   Created: 2023/08/31 16:00:14 by wdavey            #+#    #+#             */
+/*   Updated: 2023/08/31 16:01:02 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "entity.h"
 
-#include "sprite.h"
-#include "mlx.h"
-
-void	sprite_delete(t_sprite *sprite, void *mlx)
+void	patrol_move(t_entity *patrol)
 {
-	size_t	i;
-
-	if (NULL != sprite->frame_dur)
-	{
-		free(sprite->frame_dur);
-		sprite->frame_dur = NULL;
-	}
-	if (NULL != sprite->frames)
-	{
-		i = 0;
-		while (i < sprite->frame_count)
-		{
-			mlxw_destroy_image(sprite->frames[i], mlx);
-			i++;
-		}
-		free(sprite->frames);
-		sprite->frames = NULL;
-	}
+	(void)patrol;
 }

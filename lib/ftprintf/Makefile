@@ -1,4 +1,4 @@
-CFLAGS?=-Wall -Wextra -Werror -Iinclude -I. -c
+CFLAGS+=-Wall -Wextra -Werror -c -Iinclude -I.
 NAME:=libftprintf.a
 LIBFT_FILES:=\
 	libft/ft_atoi.o\

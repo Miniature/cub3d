@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_delete.c                                    :+:      :+:    :+:   */
+/*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:46:25 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 12:39:19 by wdavey           ###   ########.fr       */
+/*   Created: 2023/08/31 16:04:03 by wdavey            #+#    #+#             */
+/*   Updated: 2023/08/31 16:09:25 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_printf.h"
 
-#include "sprite.h"
-#include "mlx.h"
+#include "entity.h"
+#include "utils.h"
 
-void	sprite_delete(t_sprite *sprite, void *mlx)
+void	player_move(t_entity *player, t_pos move)
 {
-	size_t	i;
+	static size_t	moves;
 
-	if (NULL != sprite->frame_dur)
-	{
-		free(sprite->frame_dur);
-		sprite->frame_dur = NULL;
-	}
-	if (NULL != sprite->frames)
-	{
-		i = 0;
-		while (i < sprite->frame_count)
-		{
-			mlxw_destroy_image(sprite->frames[i], mlx);
-			i++;
-		}
-		free(sprite->frames);
-		sprite->frames = NULL;
-	}
+	player->pos = pos_add(player->pos, move);
+	ft_printf("moves: %d\n", (int)++moves);
 }

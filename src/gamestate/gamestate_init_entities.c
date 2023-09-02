@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:47:40 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 11:29:35 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/02 13:12:59 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,55 +15,7 @@
 #include "gamestate.h"
 #include "entity.h"
 
-char	*sprite_name_from_eid(enum e_id id)
-{
-	if (PLAYER_ID == id)
-		return ("cleanbot1.xpm");
-	if (PATROL_ID == id)
-		return ("secbox_s.xpm");
-	if (COLLECTIBLE_ID == id)
-		return ("dirt.xpm");
-	if (EXIT_ID == id)
-		return ("charger.xpm");
-	error("tried to get sprite for invalid entity id");
-	return (NULL);
-}
-
-//does this count as lazy init?
-//shallow copy is wanted to avoid duplicating image data
-t_entity	*get_entity_copy(enum e_id id, void *mlx, char *rsc_path, t_pos pos)
-{
-	static t_entity	entities[INVALID_ID];
-	static t_sprite	sprites[INVALID_ID];
-	t_entity		*new;
-
-	if (NONE_ID >= id || INVALID_ID <= id)
-		error("tried to get invalid entity");
-	if (NONE_ID == entities[id].type)
-	{
-		sprites[id] = sprite_load(mlx, rsc_path, sprite_name_from_eid(id));
-		entities[id] = entity_create(id, 0, 0, sprites + id);
-	}
-	new = ft_memcpy(malloc(sizeof(t_entity)),
-			entities + id, sizeof(t_entity));
-	new->pos = pos;
-	return (new);
-}
-
-enum e_id	e_id_from_char(char c)
-{
-	if (c == PLAYER_CHAR)
-		return (PLAYER_ID);
-	if (c == PATROL_CHAR)
-		return (PATROL_ID);
-	if (c == COLLECTIBLE_CHAR)
-		return (COLLECTIBLE_ID);
-	if (c == EXIT_CHAR)
-		return (EXIT_ID);
-	return (INVALID_ID);
-}
-
-t_list	*gamestate_init_entities(t_mlx_window window,
+t_list	*entities_from_slmap(t_mlx_window window,
 		t_slmap mapdata, char *rsc_path)
 {
 	t_list		*entities;
@@ -72,10 +24,10 @@ t_list	*gamestate_init_entities(t_mlx_window window,
 
 	entities = NULL;
 	p.y = 0;
-	while (p.y < mapdata.height)
+	while (p.y < (signed)mapdata.height)
 	{
 		p.x = 0;
-		while (p.x < mapdata.width)
+		while (p.x < (signed)mapdata.width)
 		{
 			if (!(mapdata.raw[p.y][p.x] == WALL_CHAR
 				|| mapdata.raw[p.y][p.x] == FLOOR_CHAR))
@@ -83,7 +35,7 @@ t_list	*gamestate_init_entities(t_mlx_window window,
 				e_id = e_id_from_char(mapdata.raw[p.y][p.x]);
 				if (INVALID_ID == e_id)
 					error("invalid character in map");
-				ft_lstadd_back(&(entities), ft_lstnew(get_entity_copy(
+				ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy(
 							e_id, window.mlx, rsc_path, pos_new(p.x, p.y))));
 			}
 			p.x++;
@@ -91,4 +43,42 @@ t_list	*gamestate_init_entities(t_mlx_window window,
 		p.y++;
 	}
 	return (entities);
+}
+
+void	gamestate_entity_add(t_gamestate_entities *ents, t_entity *ent)
+{
+	if (PLAYER_ID == ent->type)
+	{
+		if (NULL != ents->player)
+			error("multiple spawn locations in map");
+		ents->player = ent;
+	}
+	else if (EXIT_ID == ent->type)
+	{
+		if (NULL != ents->exit)
+			error("multiple exit locations in map");
+		ents->exit = ent;
+	}
+	else if (COLLECTIBLE_ID == ent->type)
+		ft_lstadd_front(&(ents->collectibles), ft_lstnew(ent));
+	else if (PATROL_ID == ent->type)
+		ft_lstadd_front(&(ents->patrols), ft_lstnew(ent));
+	else
+		error("loaded invalid entity");
+}
+
+t_gamestate_entities	gamestate_init_entities(t_mlx_window window,
+							t_slmap mapdata, char *rsc_path)
+{
+	t_list					*ents;
+	t_gamestate_entities	gs_ents;
+
+	ents = entities_from_slmap(window, mapdata, rsc_path);
+	ft_memset(&gs_ents, 0, sizeof(gs_ents));
+	while (NULL != ents)
+	{
+		gamestate_entity_add(&gs_ents, ents->content);
+		ents = ents->next;
+	}
+	return (gs_ents);
 }

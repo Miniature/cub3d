@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   pos_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 13:54:30 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 11:22:45 by wdavey           ###   ########.fr       */
+/*   Created: 2023/08/31 15:56:27 by wdavey            #+#    #+#             */
+/*   Updated: 2023/08/31 15:57:17 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include <stdbool.h>
-# include <stddef.h>
-
-typedef struct s_pos {
-	size_t	x;
-	size_t	y;
-}	t_pos;
-
-t_pos	pos_new(size_t x, size_t y);
-bool	pos_equal(t_pos a, t_pos b);
-
-int		error(char *msg);
-
-#endif
+t_pos	pos_add(t_pos a, t_pos b)
+{
+	return (pos_new(a.x + b.x, a.y + b.y));
+}

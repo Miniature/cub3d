@@ -1,10 +1,24 @@
-CFLAGS?=-Wall -Wextra -Werror -c -I. -Iinclude -I$(SRC_DIR)
+define NEWLINE
+
+
+endef
+
+CFLAGS+=-Wall -Wextra -Werror -c
+CFLAGS+=-MMD -MP
 export CFLAGS
+
 NAME:=so_long
+
 FILES:=\
+	entity/e_id_from_char\
 	entity/entity_create\
 	entity/entity_destroy\
 	entity/entity_draw\
+	entity/entity_get_copy\
+	game_logic/patrol_move\
+	game_logic/player_move\
+	game_logic/run_turn\
+	gamestate/gamestate_destroy\
 	gamestate/gamestate_init_entities\
 	gamestate/gamestate_init_terrain\
 	gamestate/gamestate_init\
@@ -21,54 +35,63 @@ FILES:=\
 	sprite/sprite_delete\
 	sprite/sprite_load\
 	sprite/sprite_draw\
+	sprite/sprite_name_from_e_id\
+	utils/pos_add\
 	utils/pos_equal\
 	utils/pos_new\
 	main\
 
 SRC_DIR:=src
 OBJ_DIR:=obj
-OBJ_FILES:=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
+
+OBJ_FILES=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
+
+INCLUDES:=-Iinclude -I$(SRC_DIR)
 
 SLIBS:=\
-	libftprintf\
-	get_next_line\
+	ftprintf\
+	gnl\
 
-MLX:=lib/libmlx
+SLIBPATHS=$(addsuffix .a, $(join $(addprefix lib/, $(SLIBS)), $(addprefix /lib, $(SLIBS))))
 
-SLIBS:=$(addsuffix .a, $(addprefix lib/, $(join $(SLIBS), $(addprefix /, $(SLIBS)))))
+DYLIBS:=\
+	mlx\
+
+DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix /lib, $(DYLIBS))))
 
 .PHONY: all clean fclean re bonus debug
 
 all: debug
 
+bonus: SRC_DIR=bonus
+bonus: debug
+
 debug: CFLAGS+=-g
 debug: $(NAME)
 
-$(NAME):$(SLIBS) $(OBJ_FILES) libmlx.dylib
-	cc -o $(NAME) $(OBJ_FILES) $(SLIBS) libmlx.dylib
-	install_name_tool -change libmlx.dylib @executable_path/libmlx.dylib $(NAME)
+$(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
+	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
+	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(dylib) $(NAME)$(NEWLINE))
 #i hate macs
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(dir $@)
-	cc $(CFLAGS) -o $@ $<
+-include $(OBJ_FILES:.o=.d)
 
-$(SLIBS):
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	cc $(CFLAGS) -o $@ $< $(INCLUDES)
+
+%.a:
 	$(MAKE) -C $(dir $@)
 
-libmlx.dylib:
-	$(MAKE) -C $(MLX)
-	cp -R $(MLX)/libmlx.dylib* .
+%.dylib:
+	$(MAKE) -C $(dir $@)
 
 clean:
 	rm -rf obj
-	$(foreach lib, $(SLIBS), $(shell $(MAKE) -C $(dir $(lib)) clean))
-	$(MAKE) -C $(MLX) clean
+	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) clean$(NEWLINE))
 
 fclean: clean
+	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
 	rm -f $(NAME)
-	rm -rf libmlx.dylib*
 
 re: fclean all
-
-#bonus: all

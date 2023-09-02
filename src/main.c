@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 12:52:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/08/31 17:28:38 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_gamewindow {
 	t_gamestate		game;
 }	t_gamewindow;
 
+int	run_turn(int keycode, t_gamewindow *gw);
+
 int	error(char *msg)
 {
 	ft_printf("Error\n%s\n", msg);
@@ -35,17 +37,7 @@ int	error(char *msg)
 
 static int	close(t_gamewindow *gw)
 {
-	t_list	*entities;
-
-	entities = gw->game.entities;
-	while (NULL != entities)
-	{
-		entity_destroy(*(t_entity *)(entities->content), gw->win);
-		entities = entities->next;
-	}
-	ft_lstclear(&entities, free);
-	mlxw_destroy_image(gw->game.terrain, gw->win.mlx);
-	slmap_delete(gw->game.map);
+	gamestate_destroy(gw->game, gw->win);
 	exit(0);
 	return (0);
 }
@@ -77,6 +69,7 @@ int	main(int argc, char **argv)
 	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
 	gamestate_render(gw.game, gw.win);
 	mlx_hook(gw.win.win, 17, 0, close, &gw);
+	mlx_key_hook(gw.win.win, run_turn, &gw);
 	mlx_loop(gw.win.mlx);
 	return (0);
 }
