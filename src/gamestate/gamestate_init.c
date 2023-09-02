@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 13:10:04 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/02 14:27:22 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ bool	gamestate_is_valid(t_gamestate state)
 	return (true);
 }
 
-#ifdef GAMESTATE_USE_TERRAIN_IMAGE
-
 t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 {
 	t_gamestate	state;
@@ -56,24 +54,3 @@ t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 		= sprite_load(window.mlx, rsc_path, "floor.xpm");
 	return (state);
 }
-#else
-
-t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
-{
-	t_gamestate	state;
-
-	state.entities = gamestate_init_entities(window, mapdata, rsc_path);
-	if (NULL == state.entities.collectibles)
-		error("map has no collectibles");
-	if (NULL == state.entities.exit)
-		error("map has no collectibles");
-	if (NULL == state.entities.player)
-		error("map has no collectibles");
-	state.map = mapdata;
-	state.terrain_sprites.wall
-		= sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");
-	state.terrain_sprites.floor
-		= sprite_load(window.mlx, rsc_path, "floor.xpm");
-	return (state);
-}
-#endif
