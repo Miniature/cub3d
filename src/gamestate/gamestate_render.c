@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:51:22 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:57:56 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:58:45 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	gamestate_render_movestr(t_gamewindow *gw)
 {
 	char	*movestr;
 
-	mlxw_draw_string(gw->win, "moves:", pos_new(16, 20), mlxw_rgb(255, 255, 255));
+	mlxw_draw_string(gw->win, "moves:",
+		pos_new(16, 20), mlxw_rgb(255, 255, 255));
 	movestr = ft_itoa(gw->game.entities.player->data);
 	mlxw_draw_string(gw->win, movestr, pos_new(80, 20),
 		mlxw_rgb(255, 255, 255));
