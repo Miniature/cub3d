@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:34:15 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 14:27:52 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 11:45:13 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ typedef struct s_gamestate {
 	t_slmap					map;
 }	t_gamestate;
 
+typedef struct s_gamewindow {
+	t_mlx_window	win;
+	t_gamestate		game;
+}	t_gamewindow;
+
 t_gamestate	gamestate_init(t_mlx_window window,
 				t_slmap mapdata, char *rsc_path);
-void		gamestate_render(t_gamestate state, t_mlx_window win);
+int			gamestate_render(t_gamewindow *gw);
 void		gamestate_destroy(t_gamestate state, t_mlx_window win);
 
 #endif

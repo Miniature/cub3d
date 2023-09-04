@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 17:28:38 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:19:38 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,14 @@
 #include "gamestate.h"
 #include "entity.h"
 
-typedef struct s_gamewindow {
-	t_mlx_window	win;
-	t_gamestate		game;
-}	t_gamewindow;
-
 int	run_turn(int keycode, t_gamewindow *gw);
+int	sl_close(t_gamewindow *gw);
 
 int	error(char *msg)
 {
 	ft_printf("Error\n%s\n", msg);
 	exit(1);
 	return (1);
-}
-
-static int	close(t_gamewindow *gw)
-{
-	gamestate_destroy(gw->game, gw->win);
-	exit(0);
-	return (0);
 }
 
 char	*get_rsc_path(const char *exe_path)
@@ -67,9 +56,10 @@ int	main(int argc, char **argv)
 	gw.win.win = mlx_new_window(gw.win.mlx, gw.game.map.width * 32,
 			gw.game.map.height * 32, "so_long");
 	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
-	gamestate_render(gw.game, gw.win);
-	mlx_hook(gw.win.win, 17, 0, close, &gw);
+	gamestate_render(&gw);
+	mlx_hook(gw.win.win, 17, 0, sl_close, &gw);
 	mlx_key_hook(gw.win.win, run_turn, &gw);
+	mlx_loop_hook(gw.win.mlx, gamestate_render, &gw);
 	mlx_loop(gw.win.mlx);
 	return (0);
 }

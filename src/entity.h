@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 12:30:26 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 11:08:00 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ typedef struct s_entity {
 	t_sprite	*sprite;
 	long		data;
 }	t_entity;
+
+enum e_patrol_dir {
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 
 t_entity	entity_create(enum e_id id, int x, int y, t_sprite *sprite);
 t_entity	*entity_get_copy(enum e_id id, void *mlx,

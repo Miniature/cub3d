@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 17:22:39 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:19:38 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@
 #include "gamestate.h"
 #include "keycodes.h"
 
-typedef struct s_gamewindow {
-	t_mlx_window	win;
-	t_gamestate		game;
-}	t_gamewindow;
-
 void	patrol_move(t_entity *patrol);
 void	player_move(t_entity *player, t_pos move);
+void	move_patrols(t_gamewindow *gw);
+int		sl_close(t_gamewindow *gw);
 
 t_pos	keycode_to_movement(int keycode)
 {
@@ -84,13 +81,6 @@ bool	handle_collisions(t_gamestate *state)
 	return (false);
 }
 
-static int	close(t_gamewindow *gw)
-{
-	gamestate_destroy(gw->game, gw->win);
-	exit(0);
-	return (0);
-}
-
 int	run_turn(int keycode, t_gamewindow *gw)
 {
 	t_pos	mov;
@@ -104,8 +94,7 @@ int	run_turn(int keycode, t_gamewindow *gw)
 			[pos_add(player_pos, mov).x])
 		{
 			player_move(gw->game.entities.player, keycode_to_movement(keycode));
-			ft_lstiter(gw->game.entities.patrols,
-				(void (*)(void *))patrol_move);
+			move_patrols(gw);
 		}
 		if (handle_collisions(&(gw->game)))
 		{
@@ -113,9 +102,9 @@ int	run_turn(int keycode, t_gamewindow *gw)
 				ft_printf("you win\n");
 			else
 				ft_printf("you lose\n");
-			close(gw);
+			sl_close(gw);
 		}
 	}
-	gamestate_render(gw->game, gw->win);
+	gamestate_render(gw);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_draw.c                                      :+:      :+:    :+:   */
+/*   sprite_draw_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:56:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:30:14 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:13:32 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sprite_draw_player(t_sprite sprite, t_mlx_window win, t_pos pos)
 	clock_t	sum;
 	size_t	i;
 
-	time = 0;
+	time = clock();
 	i = 0;
 	sum = 0;
 	while (i < sprite.frame_count)

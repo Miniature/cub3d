@@ -39,12 +39,18 @@ FILES:=\
 	utils/pos_add\
 	utils/pos_equal\
 	utils/pos_new\
+	close\
 	main\
+
+BONUS:=\
+	game_logic/patrol_move\
+	sprite/sprite_draw\
 
 SRC_DIR:=src
 OBJ_DIR:=obj
 
 OBJ_FILES=$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
+OBJ_FILES_BONUS=$(addsuffix _bonus.o, $(addprefix $(OBJ_DIR)/, $(BONUS))) $(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(filter-out $(BONUS), $(FILES))))
 
 INCLUDES:=-Iinclude -I$(SRC_DIR)
 
@@ -59,15 +65,16 @@ DYLIBS:=\
 
 DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix /lib, $(DYLIBS))))
 
-.PHONY: all clean fclean re bonus debug
+.PHONY: all clean fclean re bonus debug link
 
-all: debug
+all: $(NAME)
 
-bonus: SRC_DIR=bonus
-bonus: debug
+bonus: $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES_BONUS)
+bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
+bonus: all
 
 debug: CFLAGS+=-g
-debug: $(NAME)
+debug: all
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
 	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))

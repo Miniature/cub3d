@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   patrol_move.c                                      :+:      :+:    :+:   */
+/*   patrol_move_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 16:00:14 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:55:18 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:15:39 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "entity.h"
 #include "slmap.h"
@@ -27,6 +29,7 @@ static t_pos	dir_to_pos(enum e_patrol_dir dir)
 	return (pos_new(0, 0));
 }
 
+//rand sucks but it is good enough for this
 void	patrol_move(t_entity *patrol, t_slmap map)
 {
 	t_pos	nextpos;
@@ -36,7 +39,7 @@ void	patrol_move(t_entity *patrol, t_slmap map)
 	{
 		patrol->pos = nextpos;
 	}
-	patrol->data = (patrol->data + 1) % 4;
+	patrol->data = rand() % 4;
 }
 
 void	move_patrols(t_gamewindow *gw)
