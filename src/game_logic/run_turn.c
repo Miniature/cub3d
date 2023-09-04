@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:19:38 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:03:27 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	run_turn(int keycode, t_gamewindow *gw)
 	t_pos	mov;
 	t_pos	player_pos;
 
+	if (KEY_ESC == keycode)
+		sl_close(gw);
 	mov = keycode_to_movement(keycode);
 	player_pos = gw->game.entities.player->pos;
 	if (!pos_equal(pos_new(0, 0), keycode_to_movement(keycode)))
@@ -105,6 +107,5 @@ int	run_turn(int keycode, t_gamewindow *gw)
 			sl_close(gw);
 		}
 	}
-	gamestate_render(gw);
-	return (0);
+	return (gamestate_render(gw));
 }

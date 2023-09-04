@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:16:10 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 13:22:25 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:02:26 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define KEY_PERIOD 47
 # define KEY_TAB 48
 # define KEY_SPACE 49
+# define KEY_ESC 53
 # define KEY_PLUS 69
 # define KEY_MINUS 78
 # define KEY_LEFT 123

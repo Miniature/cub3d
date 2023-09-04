@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:37:02 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:06:47 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ bool	gamestate_is_valid(t_gamestate state)
 
 	if (0 >= ft_lstsize(state.entities.collectibles))
 		error("no collectibles on map");
+	if (NULL == state.entities.player)
+		error("no player spawn location");
+	if (NULL == state.entities.exit)
+		error("no exit location");
 	p = pos_new(0, 0);
 	while (p.y < (signed)state.map.height)
 	{

@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:29:15 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:47:25 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:08:46 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_slmap	slmap_load(char	*map_path)
 
 	if (NULL == map_path || !ft_strnstr(map_path, ".ber", ft_strlen(map_path)))
 	{
-		error("map has wrong file extension");
+		error("file is not a .ber map");
 	}
 	lines = get_all_lines(map_path);
 	if ('\n' == ((char *)(lines->content))[ft_strlen(lines->content)])

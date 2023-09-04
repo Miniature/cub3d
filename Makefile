@@ -75,7 +75,7 @@ bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
 
 debug: CFLAGS+=-g
-debug: all
+debug: bonus
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
 	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))

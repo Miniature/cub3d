@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:56:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:13:32 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:13:54 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	sprite_draw_player(t_sprite sprite, t_mlx_window win, t_pos pos)
 		sum += sprite.frame_dur[i++];
 	time = time % sum;
 	i = 0;
+	sum = 0;
 	while (time > sum + sprite.frame_dur[i])
 		sum += sprite.frame_dur[i++];
 	mlxw_draw(win, sprite.frames[i], pos_new(pos.x * 32, pos.y * 32));
