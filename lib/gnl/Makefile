@@ -20,8 +20,6 @@ $(NAME): $(FILES)
 
 clean:
 	rm -f $(FILES) $(BONUS) *.d
-
-fclean: clean
 	rm -f $(NAME)
 
 re: fclean all

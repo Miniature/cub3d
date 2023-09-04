@@ -98,7 +98,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	rm -rf obj
-	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) fclean$(NEWLINE))
+	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) clean$(NEWLINE))
 	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
 
 fclean: clean
