@@ -77,6 +77,35 @@ bonus: all
 debug: CFLAGS+=-g
 debug: bonus
 
+test: all
+	@echo
+	@echo --unclosed map--
+	-./so_long rsc/map/closed.ber
+	@echo
+	@echo --invalid file extension--
+	-./so_long rsc/map/name
+	@echo
+	@echo --no collectibles--
+	-./so_long rsc/map/nocollect.ber
+	@echo
+	@echo --no exit--
+	-./so_long rsc/map/noexit.ber
+	@echo
+	@echo --no player spawn--
+	-./so_long rsc/map/noplayer.ber
+	@echo
+	@echo --no path--
+	-./so_long rsc/map/path.ber
+	@echo
+	@echo --map not rectangular--
+	-./so_long rsc/map/rect.ber
+	@echo
+	@echo --wrong character--
+	-./so_long rsc/map/unrec.ber
+	@echo
+	@echo --missing file--
+	-./so_long rsc/map/none.ber
+
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
 	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
 	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)

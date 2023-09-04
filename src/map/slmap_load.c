@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:29:15 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 13:08:46 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:28:20 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*get_all_lines(char	*path)
 	lines = NULL;
 	fd = open(path, O_RDONLY);
 	if (0 >= fd)
-		return (NULL);
+		error("failed to open map file");
 	line = get_next_line(fd);
 	while (NULL != line)
 	{
@@ -51,8 +51,6 @@ void	slmap_load_copy_lines(t_slmap *map, t_list *lines)
 	it = 0;
 	while (lines_it && (lines_it->next || ft_strncmp(lines_it->content, "", 2)))
 	{
-		if ('\n' == ((char *)(lines_it->content))[ft_strlen(lines_it->content)])
-			((char *)(lines_it->content))[ft_strlen(lines_it->content)] = '\0';
 		map->raw[it++] = lines_it->content;
 		lines = lines_it;
 		lines_it = lines_it->next;
@@ -70,8 +68,6 @@ t_slmap	slmap_load(char	*map_path)
 		error("file is not a .ber map");
 	}
 	lines = get_all_lines(map_path);
-	if ('\n' == ((char *)(lines->content))[ft_strlen(lines->content)])
-		((char *)(lines->content))[ft_strlen(lines->content)] = '\0';
 	slmap.width = ft_strlen(lines->content);
 	slmap.height = ft_lstsize(lines)
 		- (0 == ft_strncmp(ft_lstlast(lines)->content, "", 2));
