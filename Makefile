@@ -4,7 +4,7 @@ define NEWLINE
 endef
 
 CFLAGS+=-Wall -Wextra -Werror -c
-CFLAGS+=-MMD -MP
+#CFLAGS+=-MMD -MP
 export CFLAGS
 
 NAME:=so_long
@@ -44,6 +44,7 @@ FILES:=\
 	main\
 
 BONUS:=\
+	entity/e_id_from_char\
 	game_logic/patrol_move\
 	sprite/sprite_draw\
 
@@ -66,7 +67,7 @@ DYLIBS:=\
 
 DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix /lib, $(DYLIBS))))
 
-.PHONY: all clean fclean re bonus debug link
+.PHONY: all clean fclean re bonus debug test
 
 all: $(NAME)
 
@@ -74,8 +75,36 @@ bonus: $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES_BONUS)
 bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
 
-debug: CFLAGS+=-g
+debug: CFLAGS+=-g -MMD -MP
 debug: bonus
+
+$(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
+	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
+	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)
+	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(notdir $(dylib)) $(NAME)$(NEWLINE))
+#i hate macs
+
+-include $(OBJ_FILES:.o=.d)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	cc $(CFLAGS) -o $@ $< $(INCLUDES)
+
+%.a:
+	$(MAKE) -C $(dir $@)
+
+%.dylib:
+	$(MAKE) -C $(dir $@)
+
+clean:
+	rm -rf obj
+	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) fclean$(NEWLINE))
+	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
+
+fclean: clean
+	rm -f $(NAME) $(notdir $(DYLIBPATHS))
+
+re: fclean all
 
 test: all
 	@echo
@@ -105,31 +134,3 @@ test: all
 	@echo
 	@echo --missing file--
 	-./so_long rsc/map/none.ber
-
-$(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
-	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
-	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)
-	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(notdir $(dylib)) $(NAME)$(NEWLINE))
-#i hate macs
-
--include $(OBJ_FILES:.o=.d)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	cc $(CFLAGS) -o $@ $< $(INCLUDES)
-
-%.a:
-	$(MAKE) -C $(dir $@)
-
-%.dylib:
-	$(MAKE) -C $(dir $@)
-
-clean:
-	rm -rf obj
-	$(foreach lib, $(dir $(SLIBPATHS)),$(MAKE) -C $(lib) fclean clean$(NEWLINE))
-	$(foreach dylib, $(DYLIBPATHS), $(MAKE) -C $(dir $(dylib)) clean$(NEWLINE))
-
-fclean: clean
-	rm -f $(NAME) $(notdir $(DYLIBPATHS))
-
-re: fclean all
