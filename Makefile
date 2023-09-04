@@ -28,6 +28,7 @@ FILES:=\
 	mlxw/mlxw_colour\
 	mlxw/mlxw_draw\
 	mlxw/mlxw_destroy_image\
+	mlxw/mlxw_draw_string\
 	mlxw/mlxw_image_overlay\
 	mlxw/mlxw_load_png\
 	mlxw/mlxw_load_xpm\

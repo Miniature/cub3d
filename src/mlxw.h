@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:43:28 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 10:00:28 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:51:16 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void			mlxw_destroy_image(t_mlx_image img, void *mlx);
 t_mlx_image		mlxw_image_overlay(t_mlx_image dst, t_mlx_image src, t_pos p);
 
 int				mlxw_draw(t_mlx_window win, t_mlx_image image, t_pos pos);
+void			mlxw_draw_string(t_mlx_window win, char *str, t_pos pos,
+					t_colour colour);
 
 #endif

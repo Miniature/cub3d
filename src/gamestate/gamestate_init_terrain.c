@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:43:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 14:26:52 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:55:42 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_mlx_image	gamestate_init_terrain(t_mlx_window window,
 		{
 			mlxw_image_overlay(image,
 				terrain[WALL_CHAR == map.raw[p.y][p.x]].frames[0],
-				pos_new(p.x * 32 + 1, p.y * 32 + 1));
+				pos_new(p.x * 32, p.y * 32));
 			p.x++;
 		}
 		p.y++;

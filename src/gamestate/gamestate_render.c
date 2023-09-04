@@ -6,9 +6,11 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:51:22 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:45:22 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:57:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "libft.h"
 
@@ -19,6 +21,17 @@
 void	gamestate_render_terrain(t_gamestate state, t_mlx_window win)
 {
 	mlxw_draw(win, state.terrain, pos_new(0, 0));
+}
+
+void	gamestate_render_movestr(t_gamewindow *gw)
+{
+	char	*movestr;
+
+	mlxw_draw_string(gw->win, "moves:", pos_new(16, 20), mlxw_rgb(255, 255, 255));
+	movestr = ft_itoa(gw->game.entities.player->data);
+	mlxw_draw_string(gw->win, movestr, pos_new(80, 20),
+		mlxw_rgb(255, 255, 255));
+	free(movestr);
 }
 
 int	gamestate_render(t_gamewindow *gw)
@@ -43,5 +56,6 @@ int	gamestate_render(t_gamewindow *gw)
 	}
 	entity_draw(*gw->game.entities.exit, gw->win);
 	entity_draw(*gw->game.entities.player, gw->win);
+	gamestate_render_movestr(gw);
 	return (0);
 }
