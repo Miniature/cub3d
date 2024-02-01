@@ -3,7 +3,7 @@ define NEWLINE
 
 endef
 
-CFLAGS+=-Wall -Wextra -Werror -c
+CFLAGS+=-Wall -Wextra -Werror -c -MMD -MP
 #CFLAGS+=-MMD -MP
 export CFLAGS
 
@@ -77,6 +77,8 @@ all: $(NAME)
 
 debug: CFLAGS+=-g -MMD -MP
 debug: bonus
+
+-include $(OBJ_FILES:.o=.d)
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES)
 	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
