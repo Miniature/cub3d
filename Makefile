@@ -40,6 +40,7 @@ FILES:=\
 	utils/pos_add\
 	utils/pos_equal\
 	utils/pos_new\
+	utils/pos_rotate\
 	close\
 	main\
 
