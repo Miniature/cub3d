@@ -22,7 +22,7 @@ typedef struct s_pos
 	float	y;
 }	t_pos;
 
-t_pos	pos_new(long x, long y);
+t_pos	pos_new(float x, float y);
 bool	pos_equal(t_pos a, t_pos b);
 t_pos	pos_add(t_pos a, t_pos b);
 

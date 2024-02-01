@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:44:45 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 13:26:10 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:48:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "utils.h"
 
-t_pos	pos_new(long x, long y)
+t_pos	pos_new(float x, float y)
 {
 	t_pos	rval;
 
