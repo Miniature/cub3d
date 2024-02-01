@@ -6,12 +6,13 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:19:38 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 13:42:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "mlx.h"
 #include "ft_printf.h"
@@ -26,7 +27,7 @@ int	sl_close(t_gamewindow *gw);
 
 int	error(char *msg)
 {
-	ft_printf("Error\n%s\n", msg);
+	printf("Error\n%s\n", msg);
 	exit(1);
 	return (1);
 }

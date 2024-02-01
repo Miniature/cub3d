@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:08:00 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 13:54:57 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "sprite.h"
 
 //INVALID_ID must be the last entry and NONE_ID must be the 0th
-enum e_id {
+enum e_id
+{
 	NONE_ID = 0,
 	PLAYER_ID,
 	PATROL_ID,
@@ -27,14 +28,17 @@ enum e_id {
 	INVALID_ID
 };
 
-typedef struct s_entity {
+typedef struct s_entity
+{
 	enum e_id	type;
 	t_pos		pos;
+	float		facing;
 	t_sprite	*sprite;
 	long		data;
 }	t_entity;
 
-enum e_patrol_dir {
+enum e_patrol_dir
+{
 	NORTH,
 	SOUTH,
 	EAST,

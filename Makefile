@@ -7,7 +7,7 @@ CFLAGS+=-Wall -Wextra -Werror -c
 #CFLAGS+=-MMD -MP
 export CFLAGS
 
-NAME:=so_long
+NAME:=cub3d
 
 FILES:=\
 	entity/e_id_from_char\
@@ -67,13 +67,13 @@ DYLIBS:=\
 
 DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix /lib, $(DYLIBS))))
 
-.PHONY: all clean fclean re bonus debug test
-
-all: $(NAME)
+.PHONY: all clean fclean re bonus debug
 
 bonus: $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES_BONUS)
 bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
+
+all: $(NAME)
 
 debug: CFLAGS+=-g -MMD -MP
 debug: bonus
@@ -105,32 +105,3 @@ fclean: clean
 	rm -f $(NAME) $(notdir $(DYLIBPATHS))
 
 re: fclean all
-
-test: all
-	@echo
-	@echo --unclosed map--
-	-./so_long rsc/map/closed.ber
-	@echo
-	@echo --invalid file extension--
-	-./so_long rsc/map/name
-	@echo
-	@echo --no collectibles--
-	-./so_long rsc/map/nocollect.ber
-	@echo
-	@echo --no exit--
-	-./so_long rsc/map/noexit.ber
-	@echo
-	@echo --no player spawn--
-	-./so_long rsc/map/noplayer.ber
-	@echo
-	@echo --no path--
-	-./so_long rsc/map/path.ber
-	@echo
-	@echo --map not rectangular--
-	-./so_long rsc/map/rect.ber
-	@echo
-	@echo --wrong character--
-	-./so_long rsc/map/unrec.ber
-	@echo
-	@echo --missing file--
-	-./so_long rsc/map/none.ber
