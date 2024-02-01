@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:43:28 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:51:16 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:02:28 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,25 @@
 
 # include "utils.h"
 
-typedef struct s_mlx_window {
+typedef struct s_mlx_window
+{
 	void	*mlx;
 	void	*win;
 }	t_mlx_window;
 
-typedef struct s_mlx_image {
+typedef struct s_mlx_image
+{
 	void	*img;
 	int		w;
 	int		h;
 }	t_mlx_image;
 
-typedef union colour{
+typedef union colour
+{
 	int	colour;
 	int	c;
-	struct {
+	struct
+	{
 		unsigned char	a;
 		unsigned char	r;
 		unsigned char	g;

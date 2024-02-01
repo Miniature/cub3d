@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:26:20 by wdavey            #+#    #+#             */
-/*   Updated: 2023/08/31 09:29:44 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:02:37 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define COLLECTIBLE_CHAR 67 //'C'
 # define PATROL_CHAR 72 //'H'
 
-typedef struct s_slmap{
+typedef struct s_slmap
+{
 	char	**raw;
 	size_t	width;
 	size_t	height;

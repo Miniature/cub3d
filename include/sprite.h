@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:45:33 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:28:46 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:02:40 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 # define PLAYER_SPRITE_CYCLE_TIME 500000 //(CLOCKS_PER_SEC / 2)
 
-typedef struct s_sprite {
+typedef struct s_sprite
+{
 	t_mlx_image	*frames;
 	clock_t		*frame_dur;
 	size_t		frame_count;
