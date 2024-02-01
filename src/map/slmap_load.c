@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:29:15 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 13:28:20 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:09:23 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_slmap	slmap_load(char	*map_path)
 	t_list	*lines;
 	t_slmap	slmap;
 
-	if (NULL == map_path || !ft_strnstr(map_path, ".ber", ft_strlen(map_path)))
+	if (NULL == map_path || !ft_strnstr(map_path, ".cub", ft_strlen(map_path)))
 	{
-		error("file is not a .ber map");
+		error("file is not a .cub map");
 	}
 	lines = get_all_lines(map_path);
 	slmap.width = ft_strlen(lines->content);
