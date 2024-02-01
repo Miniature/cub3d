@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:54:30 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 13:54:42 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:06:30 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_pos
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 }	t_pos;
 
 t_pos	pos_new(long x, long y);
