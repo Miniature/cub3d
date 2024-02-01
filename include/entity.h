@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:43:19 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:55:47 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_entity
 {
 	enum e_id	type;
 	t_pos		pos;
-	float		facing;	//in radians
+	float		facing;	//in radians, anticlockwise from north
 	t_sprite	*sprite;
 	long		data;
 }	t_entity;
