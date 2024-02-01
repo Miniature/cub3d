@@ -15,6 +15,7 @@ FILES:=\
 	entity/entity_destroy\
 	entity/entity_draw\
 	entity/entity_get_copy\
+	game_logic/on_key\
 	game_logic/patrol_move\
 	game_logic/player_move\
 	game_logic/run_turn\

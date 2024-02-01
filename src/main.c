@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 13:42:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:28:25 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 #include "gamestate.h"
 #include "entity.h"
 
-int	run_turn(int keycode, t_gamewindow *gw);
+int	on_key(int keycode, t_gamewindow *gw);
+int	run_turn(t_gamewindow *gw);
 int	sl_close(t_gamewindow *gw);
 
 int	error(char *msg)
@@ -59,8 +60,8 @@ int	main(int argc, char **argv)
 	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
 	gamestate_render(&gw);
 	mlx_hook(gw.win.win, 17, 0, sl_close, &gw);
-	mlx_key_hook(gw.win.win, run_turn, &gw);
-	mlx_loop_hook(gw.win.mlx, gamestate_render, &gw);
+	mlx_key_hook(gw.win.win, on_key, &gw);
+	mlx_loop_hook(gw.win.mlx, run_turn, &gw);
 	mlx_loop(gw.win.mlx);
 	return (0);
 }
