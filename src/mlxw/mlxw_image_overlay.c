@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:05:55 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 14:24:17 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:04:49 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_mlx_image	mlxw_image_overlay(t_mlx_image dst, t_mlx_image src, t_pos p)
 	{
 		dsti.x = (p.x * dst_d.bpp / 8);
 		dsti.y = (y + p.y) * dst_d.line_l;
-		ft_memcpy(dst_d.data + ((y + p.y) * dst_d.line_l)
-			+ (p.x * dst_d.bpp / 8),
+		ft_memcpy(dst_d.data + ((y + (int)round(p.y)) * dst_d.line_l)
+			+ ((int)round(p.x) * dst_d.bpp / 8),
 			src_d.data + (y * src_d.line_l),
 			min(src_d.line_l, dst_d.line_l - (p.x * dst_d.bpp / 8)));
 		y++;

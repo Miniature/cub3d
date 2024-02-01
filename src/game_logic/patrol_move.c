@@ -6,9 +6,11 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 16:00:14 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:55:18 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:32:02 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <math.h>
 
 #include "entity.h"
 #include "slmap.h"
@@ -32,7 +34,7 @@ void	patrol_move(t_entity *patrol, t_slmap map)
 	t_pos	nextpos;
 
 	nextpos = pos_add(patrol->pos, dir_to_pos(patrol->data));
-	if (WALL_CHAR != map.raw[nextpos.y][nextpos.x])
+	if (WALL_CHAR != map.raw[(int)round(nextpos.y)][(int)round(nextpos.x)])
 	{
 		patrol->pos = nextpos;
 	}

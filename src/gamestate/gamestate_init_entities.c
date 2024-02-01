@@ -6,11 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:47:40 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/02 13:12:59 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:35:09 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 
 #include "gamestate.h"
 #include "entity.h"
@@ -29,10 +30,11 @@ t_list	*entities_from_slmap(t_mlx_window window,
 		p.x = 0;
 		while (p.x < (signed)mapdata.width)
 		{
-			if (!(mapdata.raw[p.y][p.x] == WALL_CHAR
-				|| mapdata.raw[p.y][p.x] == FLOOR_CHAR))
+			if (!(mapdata.raw[(int)round(p.y)][(int)round(p.x)] == WALL_CHAR
+				|| mapdata.raw[(int)round(p.y)][(int)round(p.x)] == FLOOR_CHAR))
 			{
-				e_id = e_id_from_char(mapdata.raw[p.y][p.x]);
+				e_id = e_id_from_char(
+						mapdata.raw[(int)round(p.y)][(int)round(p.x)]);
 				if (INVALID_ID == e_id)
 					error("invalid character in map");
 				ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy(

@@ -6,11 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 13:06:47 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:03:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 
 #include "libft.h"
 
@@ -25,11 +26,11 @@ t_gamestate_entities	gamestate_init_entities(t_mlx_window window,
 
 void	gamestate_has_path_adj(t_slmap map, bool **result, t_pos pos)
 {
-	if (true == result[pos.y][pos.x])
+	if (true == result[(int)round(pos.y)][(int)round(pos.x)])
 		return ;
-	if (WALL_CHAR != map.raw[pos.y][pos.x])
+	if (WALL_CHAR != map.raw[(int)round(pos.y)][(int)round(pos.x)])
 	{
-		result[pos.y][pos.x] = true;
+		result[(int)round(pos.y)][(int)round(pos.x)] = true;
 		gamestate_has_path_adj(map, result, pos_add(pos, pos_new(1, 0)));
 		gamestate_has_path_adj(map, result, pos_add(pos, pos_new(-1, 0)));
 		gamestate_has_path_adj(map, result, pos_add(pos, pos_new(0, 1)));
@@ -48,7 +49,8 @@ bool	gamestate_has_path(t_gamestate state)
 	while (i < state.map.height)
 		pathable[i++] = ft_calloc(state.map.width, sizeof(**pathable));
 	gamestate_has_path_adj(state.map, pathable, state.entities.player->pos);
-	result = pathable[state.entities.exit->pos.y][state.entities.exit->pos.x];
+	result = pathable[(int)round(state.entities.exit->pos.y)]
+	[(int)round(state.entities.exit->pos.x)];
 	i = 0;
 	while (i < state.map.height)
 		free(pathable[i++]);
@@ -71,7 +73,7 @@ bool	gamestate_is_valid(t_gamestate state)
 	{
 		while (p.x < (signed)state.map.width)
 		{
-			if (WALL_CHAR != state.map.raw[p.y][p.x])
+			if (WALL_CHAR != state.map.raw[(int)round(p.y)][(int)round(p.x)])
 				error("map is not entirely enclosed");
 			p.x++;
 		}

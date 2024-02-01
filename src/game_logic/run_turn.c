@@ -6,11 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 13:03:27 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:34:11 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 
 #include "ft_printf.h"
 #include "mlx.h"
@@ -92,8 +93,9 @@ int	run_turn(int keycode, t_gamewindow *gw)
 	player_pos = gw->game.entities.player->pos;
 	if (!pos_equal(pos_new(0, 0), keycode_to_movement(keycode)))
 	{
-		if (WALL_CHAR != gw->game.map.raw[pos_add(player_pos, mov).y]
-			[pos_add(player_pos, mov).x])
+		if (WALL_CHAR != gw->game.map.raw
+			[(int)round(pos_add(player_pos, mov).y)]
+			[(int)round(pos_add(player_pos, mov).x)])
 		{
 			player_move(gw->game.entities.player, keycode_to_movement(keycode));
 			move_patrols(gw);

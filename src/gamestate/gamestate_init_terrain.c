@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:43:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:55:42 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:38:13 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ t_mlx_image	gamestate_init_terrain(t_mlx_window window,
 		t_slmap map, char *rsc_path)
 {
 	t_mlx_image	image;
-	t_pos		p;
+	int			p[2];
 	t_sprite	terrain[2];
 
 	image = mlxw_new_image(window.mlx, 32 * map.width, 32 * map.height);
-	p = pos_new(0, 0);
+	ft_memset(p, 0, sizeof(*p) * 2);
 	terrain[1] = sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");
 	terrain[0] = sprite_load(window.mlx, rsc_path, "floor.xpm");
-	while ((unsigned)p.y < map.height)
+	while ((unsigned)p[1] < map.height)
 	{
-		if (ft_strlen(map.raw[p.y]) != map.width)
+		if (ft_strlen(map.raw[p[1]]) != map.width)
 			error("map is not rectangular");
-		p.x = 0;
-		while ((unsigned)p.x < map.width)
+		p[0] = 0;
+		while ((unsigned)p[0] < map.width)
 		{
 			mlxw_image_overlay(image,
-				terrain[WALL_CHAR == map.raw[p.y][p.x]].frames[0],
-				pos_new(p.x * 32, p.y * 32));
-			p.x++;
+				terrain[WALL_CHAR == map.raw[p[1]][p[0]]].frames[0],
+				pos_new(p[0] * 32, p[1] * 32));
+			p[0]++;
 		}
-		p.y++;
+		p[1]++;
 	}
 	sprite_delete(terrain + 1, window.mlx);
 	sprite_delete(terrain, window.mlx);
