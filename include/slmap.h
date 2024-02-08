@@ -33,4 +33,5 @@ t_slmap	slmap_load(char *map_path);
 void	slmap_delete(t_slmap slmap);
 void	slmap_free(t_slmap *slmap);
 
+char	slmap_get_block(t_slmap slmap, int x, int y);
 #endif
