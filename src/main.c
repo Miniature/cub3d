@@ -6,13 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 07:53:01 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:28:25 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/09 06:30:15 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "mlx.h"
 #include "ft_printf.h"
@@ -25,13 +24,6 @@
 int	on_key(int keycode, t_gamewindow *gw);
 int	run_turn(t_gamewindow *gw);
 int	sl_close(t_gamewindow *gw);
-
-int	error(char *msg)
-{
-	printf("Error\n%s\n", msg);
-	exit(1);
-	return (1);
-}
 
 char	*get_rsc_path(const char *exe_path)
 {
@@ -67,4 +59,3 @@ int	main(int argc, char **argv)
 	mlx_loop(gw.win.mlx);
 	return (0);
 }
-
