@@ -26,6 +26,7 @@ FILES:=\
 	gamestate/gamestate_render\
 	map/slmap_delete\
 	map/slmap_load\
+	map/slmap_get_block\
 	mlxw/mlxw_colour\
 	mlxw/mlxw_draw\
 	mlxw/mlxw_destroy_image\
