@@ -9,6 +9,9 @@ export CFLAGS
 
 NAME:=cub3d
 
+DEBUG_ARGS:=\
+	rsc/map/ex1.cub\
+
 FILES:=\
 	entity/e_id_from_char\
 	entity/entity_create\
@@ -69,7 +72,7 @@ DYLIBS:=\
 
 DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix /lib, $(DYLIBS))))
 
-.PHONY: all clean fclean re bonus debug
+.PHONY: all clean fclean re bonus debug test
 
 bonus: $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES_BONUS)
 bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
@@ -109,3 +112,6 @@ fclean: clean
 	rm -f $(NAME) $(notdir $(DYLIBPATHS))
 
 re: fclean all
+
+test: debug
+	$(foreach arg, $(TEST_ARGS), ./$(NAME) $(ARG))
