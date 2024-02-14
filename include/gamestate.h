@@ -19,6 +19,9 @@
 # include "slmap.h"
 # include "entity.h"
 
+# define DISPLAY_WIDTH 1280
+# define DISPLAY_HEIGHT 960
+
 typedef struct s_gamestate_entities
 {
 	t_entity	*player;
@@ -38,6 +41,7 @@ typedef struct s_gamestate
 	t_gamestate_entities	entities;
 	t_gamestate_terrains	terrain_sprites;
 	t_mlx_image				terrain;
+	t_mlx_image				background_img;
 	t_slmap					map;
 }	t_gamestate;
 
@@ -45,6 +49,8 @@ typedef struct s_gamewindow
 {
 	t_mlx_window	win;
 	t_gamestate		game;
+	int	display_width; //window size
+	int	display_height;
 }	t_gamewindow;
 
 t_gamestate	gamestate_init(t_mlx_window window,

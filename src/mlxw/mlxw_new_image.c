@@ -21,6 +21,7 @@ t_mlx_image	mlxw_new_image(void *mlx, size_t width, size_t height)
 	t_mlx_image	new;
 
 	new.img = mlx_new_image(mlx, width, height);
+	new.addr = mlx_get_data_addr(new.img, &new.bpp, &new.line_len, &new.endian);
 	new.w = width;
 	new.h = height;
 	return (new);

@@ -25,7 +25,7 @@
 typedef struct s_slmap
 {
 	char	**raw;
-	size_t	width;
+	size_t	width; //minmap size
 	size_t	height;
 }	t_slmap;
 

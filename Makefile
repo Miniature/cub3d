@@ -22,6 +22,7 @@ FILES:=\
 	gamestate/gamestate_destroy\
 	gamestate/gamestate_init_entities\
 	gamestate/gamestate_init_terrain\
+	gamestate/gamestate_init_background\
 	gamestate/gamestate_init\
 	gamestate/gamestate_render\
 	map/slmap_delete\
@@ -43,6 +44,8 @@ FILES:=\
 	utils/pos_equal\
 	utils/pos_new\
 	utils/pos_rotate\
+	render/draw\
+	render/render\
 	close\
 	main\
 
