@@ -44,8 +44,10 @@ FILES:=\
 	utils/pos_equal\
 	utils/pos_new\
 	utils/pos_rotate\
-	render/draw\
+	render/render_draw\
 	render/render\
+	raycasting/raycasting\
+	raycasting/raycasting_perspective_init\
 	close\
 	main\
 

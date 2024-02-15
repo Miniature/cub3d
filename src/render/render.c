@@ -30,9 +30,9 @@ void	render_background(t_gamewindow *gw)
 		while (y < gw->display_height)
 		{
 			if (y < gw->display_height / 2)
-				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(255, 255, 255, 255));
+				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(0, 0, 0, 0));
 			else
-				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(150, 150, 150, 150));
+				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(0, 150, 150, 150));
 			y++;
 		}
 		++x;
@@ -42,6 +42,7 @@ void	render_background(t_gamewindow *gw)
 int	render(t_gamewindow *gw)
 {
 	render_background(gw);
+	raycasting(gw);
 	mlx_put_image_to_window(gw->win.mlx, gw->win.win, gw->game.background_img.img, 0, 0);
 	return (0);
 }

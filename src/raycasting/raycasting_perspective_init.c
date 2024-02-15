@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   raycasting_perspective_init.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ihogben <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "raycasting.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-void	img_pix_put(t_gamewindow *gw, t_mlx_image *img,  int x, int y, int color)
+t_gamestate_perspective *raycasting_perspective_init()
 {
-	char	*pixel;
-
-	if (y < 0 || y > gw->display_height - 1 || x < 0
-		|| x > gw->display_width - 1)
-		return ;
-	pixel = (img->addr + (y * img->line_len
-				+ x * (img->bpp / 8)));
-	*(int *)pixel = color;
+	t_gamestate_perspective *p = 
+				(t_gamestate_perspective *)malloc(sizeof(t_gamestate_perspective));
+	p->plane_x = 0.66; //should be initialized depending on spawn direction
+	p->plane_y = 0;// currently defaulting to norths
+	return (p);
 }

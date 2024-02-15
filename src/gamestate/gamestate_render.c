@@ -17,6 +17,7 @@
 #include "gamestate.h"
 #include "entity.h"
 #include "sprite.h"
+#include "render.h"
 
 void	gamestate_render_terrain(t_gamestate state, t_mlx_window win)
 {
@@ -58,5 +59,6 @@ int	gamestate_render(t_gamewindow *gw)
 	entity_draw(*gw->game.entities.exit, gw->win);
 	entity_draw(*gw->game.entities.player, gw->win);
 	gamestate_render_movestr(gw);
+	render(gw);
 	return (0);
 }

@@ -62,7 +62,9 @@ int	main(int argc, char **argv)
 			(gw.display_height), "Cub3d");
 	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
 
-	render(&gw);
+	gw.p = raycasting_perspective_init();
+	//gw.game.entities.player->facing += 0.7853975f;//test different veiwpoints for raycasting
+	//render(&gw);
 	gamestate_render(&gw);
 	
 	mlx_hook(gw.win.win, 17, 0, sl_close, &gw);
