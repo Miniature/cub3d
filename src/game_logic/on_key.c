@@ -24,7 +24,7 @@ void	player_move(t_entity *player, t_pos move);
 int		sl_close(t_gamewindow *gw);
 
 #define MOVE_SPEED 0.1f
-#define KEY_TURN_SPEED 0.1f
+#define KEY_TURN_SPEED 0.261799f
 
 t_pos	keycode_to_movement(int keycode)
 {

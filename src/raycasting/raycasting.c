@@ -16,15 +16,15 @@
 
 void	raycasting_init(t_gamewindow *gw, int x)
 {
-	gw->p->map_x = gw->game.entities.player->pos.x;
-	gw->p->map_y = gw->game.entities.player->pos.y;
-	gw->p->pos_x = gw->p->map_x;
-	gw->p->pos_y = gw->p->map_y;
+	gw->p->pos_x = gw->game.entities.player->pos.y;
+	gw->p->pos_y = gw->game.entities.player->pos.x;
+	gw->p->map_x = gw->p->pos_x;
+	gw->p->map_y = gw->p->pos_y;
 	gw->p->cam_x = 2 * x / (double)gw->display_width - 1;
-	//gw->p->plane_x = cos(gw->game.entities.player->facing) * -1 * 0.66f; //fix camera plane rotation
-	//gw->p->plane_y = sin(gw->game.entities.player->facing) * -1 * 0.66f;
-	gw->p->ray_dir_x = cos(gw->game.entities.player->facing) + gw->p->plane_x * gw->p->cam_x;
-	gw->p->ray_dir_y = sin(gw->game.entities.player->facing) + gw->p->plane_y * gw->p->cam_x;
+	gw->p->plane_x = cos(gw->game.entities.player->facing + 1.570796);//camera plane is always 90 degrees
+	gw->p->plane_y = sin(gw->game.entities.player->facing + 1.570796);//from facing
+	gw->p->ray_dir_x = (-1 * cos(gw->game.entities.player->facing)) + gw->p->plane_x * gw->p->cam_x;
+	gw->p->ray_dir_y = (-1 * sin(gw->game.entities.player->facing)) + gw->p->plane_y * gw->p->cam_x;
 }
 
 void	get_delta_dist(t_gamestate_perspective *p)

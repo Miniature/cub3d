@@ -19,9 +19,9 @@
 # include "slmap.h"
 # include "entity.h"
 
-# define DISPLAY_WIDTH 640
-# define DISPLAY_HEIGHT 480
-# define TEXTURE_RESOLUTION 128
+# define DISPLAY_WIDTH 1680
+# define DISPLAY_HEIGHT 960
+# define TEXTURE_RESOLUTION 32
 
 typedef struct s_gamestate_entities
 {
@@ -50,8 +50,8 @@ typedef struct s_gamestate_pespective
 {
 	float	pos_x;
 	float	pos_y;
-	float	map_x;
-	float	map_y;
+	int		map_x;
+	int		map_y;
 	double	cam_x;//cam x scan position
 	double	ray_dir_x;
 	double	ray_dir_y;

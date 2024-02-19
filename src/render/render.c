@@ -18,6 +18,13 @@ int	build_argb(int a, int r, int g, int b)
 	return (a << 24 | r << 16 | g << 8 | b);
 }
 
+int	get_colour(t_gamewindow *gw, int x, int y, int i)
+{
+	i = 0; //i can be used to select a texture from an array
+	return (*(int *)(gw->game.terrain.addr
+		+ (y * gw->game.terrain.line_len + x * (gw->game.terrain.bpp / 8))));
+}
+
 void	render_background(t_gamewindow *gw)
 {
 	int	x;
@@ -39,7 +46,7 @@ void	render_background(t_gamewindow *gw)
 	}
 }
 
-int	render(t_gamewindow *gw)
+int	render_raycasting(t_gamewindow *gw)
 {
 	render_background(gw);
 	raycasting(gw);

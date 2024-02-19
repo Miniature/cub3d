@@ -62,7 +62,7 @@ void	draw(t_gamewindow *gw, int x, int texture)
 {
 	int	colour;
 	//ft_printf("made it to draw\n");
-	colour = texture;
+	colour = get_colour(gw, gw->p->tex_x, gw->p->tex_y, texture);
 	img_pix_put(gw, &gw->game.background_img, x, gw->p->column_start, colour);	
 }
 
@@ -78,7 +78,7 @@ void	draw_column(t_gamewindow *gw, int x)
 		//ft_printf("wallside: %d end:");
 		gw->p->tex_y = (int)gw->p->tex_pos & (TEXTURE_RESOLUTION - 1);
 		gw->p->tex_pos += gw->p->step;
-		if (gw->p->wall_side == 1 && gw->p->ray_dir_y < 0)//SOUTH
+		if (gw->p->wall_side == 1 && gw->p->ray_dir_y < 0)//SOUTH DRAW CURRENTLY USING TEXTURES NOT COLORS
 			draw(gw, x, build_argb(0, 255, 0, 0));
 		else if (gw->p->wall_side == 1 && gw->p->ray_dir_y > 0)//NORTH
 			draw(gw, x, build_argb(0, 0, 255, 0));
