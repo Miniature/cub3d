@@ -20,9 +20,9 @@ int	build_argb(int a, int r, int g, int b)
 
 int	get_colour(t_gamewindow *gw, int x, int y, int i)
 {
-	i = 0; //i can be used to select a texture from an array
-	return (*(int *)(gw->game.terrain.addr
-		+ (y * gw->game.terrain.line_len + x * (gw->game.terrain.bpp / 8))));
+	return (*(int *)(gw->game.wall_img[i].addr
+		+ (y * gw->game.wall_img[i].line_len + x
+			* (gw->game.wall_img[i].bpp / 8))));
 }
 
 void	render_background(t_gamewindow *gw)
@@ -30,6 +30,8 @@ void	render_background(t_gamewindow *gw)
 	int	x;
 	int	y;
 
+	gw->game.ceiling_colour = build_argb(0, 0, 0, 0);//COMMENT OUT AFTER IMPLEMENTATION
+	gw->game.floor_colour = build_argb(0, 150, 150, 150);
 	x = 0;
 	while (x < gw->display_width)
 	{
@@ -37,9 +39,9 @@ void	render_background(t_gamewindow *gw)
 		while (y < gw->display_height)
 		{
 			if (y < gw->display_height / 2)
-				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(0, 0, 0, 0));
+				b_img_pix_put(gw, x, y, gw->game.ceiling_colour);
 			else
-				img_pix_put(gw, &gw->game.background_img, x, y, build_argb(0, 150, 150, 150));
+				b_img_pix_put(gw, x, y, gw->game.floor_colour);
 			y++;
 		}
 		++x;

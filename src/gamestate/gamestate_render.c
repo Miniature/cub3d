@@ -40,8 +40,8 @@ int	gamestate_render(t_gamewindow *gw)
 {
 	t_list		*entity_list;
 	t_entity	*entity;
-	
-	render_raycasting(gw); //move to before so_long render to see both, causes visual tearing
+
+	render_raycasting(gw);//running before gamestate_render_terrain, causes visual tearing but allows view of map
 	gamestate_render_terrain(gw->game, gw->win);
 	entity_list = gw->game.entities.collectibles;
 	while (NULL != entity_list)
@@ -60,6 +60,5 @@ int	gamestate_render(t_gamewindow *gw)
 	entity_draw(*gw->game.entities.exit, gw->win);
 	entity_draw(*gw->game.entities.player, gw->win);
 	gamestate_render_movestr(gw);
-	
 	return (0);
 }

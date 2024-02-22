@@ -14,9 +14,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_gamestate_perspective *raycasting_perspective_init()
+t_gamestate_perspective	*raycasting_perspective_init(void)
 {
-	t_gamestate_perspective *p = 
-				(t_gamestate_perspective *)malloc(sizeof(t_gamestate_perspective));
+	t_gamestate_perspective	*p;
+
+	p = (t_gamestate_perspective *)malloc(sizeof(t_gamestate_perspective));
 	return (p);
 }

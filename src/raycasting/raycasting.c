@@ -16,15 +16,17 @@
 
 void	raycasting_init(t_gamewindow *gw, int x)
 {
-	gw->p->pos_x = gw->game.entities.player->pos.y;
-	gw->p->pos_y = gw->game.entities.player->pos.x;
+	gw->p->pos_x = gw->game.entities.player->pos.y + 0.5f;
+	gw->p->pos_y = gw->game.entities.player->pos.x + 0.5f;
 	gw->p->map_x = gw->p->pos_x;
 	gw->p->map_y = gw->p->pos_y;
 	gw->p->cam_x = 2 * x / (double)gw->display_width - 1;
-	gw->p->plane_x = cos(gw->game.entities.player->facing + 1.570796);//camera plane is always 90 degrees
-	gw->p->plane_y = sin(gw->game.entities.player->facing + 1.570796);//from facing
-	gw->p->ray_dir_x = (-1 * cos(gw->game.entities.player->facing)) + gw->p->plane_x * gw->p->cam_x;
-	gw->p->ray_dir_y = (-1 * sin(gw->game.entities.player->facing)) + gw->p->plane_y * gw->p->cam_x;
+	gw->p->plane_x = cos(gw->game.entities.player->facing + 1.570796);
+	gw->p->plane_y = sin(gw->game.entities.player->facing + 1.570796);
+	gw->p->ray_dir_x = (-1 * cos(gw->game.entities.player->facing))
+		+ gw->p->plane_x * gw->p->cam_x;
+	gw->p->ray_dir_y = (-1 * sin(gw->game.entities.player->facing))
+		+ gw->p->plane_y * gw->p->cam_x;
 }
 
 void	get_delta_dist(t_gamestate_perspective *p)
@@ -92,16 +94,18 @@ void	raycasting(t_gamewindow *gw)
 	int	x;
 
 	x = 0;
-	while (x < gw->display_width) //add render scale later
+	while (x < gw->display_width) //could add render scale later
 	{
 		raycasting_init(gw, x);
 		get_delta_dist(gw->p);
 		get_step(gw->p);
 		get_wall_normal(gw->p, gw);
 		if (gw->p->wall_side == 0)
-			gw->p->persp_wall_dist = ((gw->p->side_dist_x - gw->p->delta_dist_x));
+			gw->p->persp_wall_dist
+				= ((gw->p->side_dist_x - gw->p->delta_dist_x));
 		else
-			gw->p->persp_wall_dist = ((gw->p->side_dist_y - gw->p->delta_dist_y));
+			gw->p->persp_wall_dist
+				= ((gw->p->side_dist_y - gw->p->delta_dist_y));
 		draw_column(gw, x);
 		x++;
 	}

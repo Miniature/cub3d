@@ -21,7 +21,6 @@ t_mlx_image	gamestate_init_background(t_mlx_window window)
 {
 	t_mlx_image	image;
 
-	image = mlxw_new_image(window.mlx,DISPLAY_WIDTH, DISPLAY_HEIGHT);
-
+	image = mlxw_new_image(window.mlx, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 	return (image);
 }

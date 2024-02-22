@@ -92,6 +92,10 @@ t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 	state.terrain = gamestate_init_terrain(window, mapdata, rsc_path);
 	state.entities = gamestate_init_entities(window, mapdata, rsc_path);
 	state.background_img = gamestate_init_background(window);
+	state.wall_img[0] = state.terrain; //temp all walls copy terrain
+	state.wall_img[1] = state.terrain;
+	state.wall_img[2] = state.terrain;
+	state.wall_img[3] = state.terrain;
 	state.map = mapdata;
 	state.terrain_sprites.wall
 		= sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");

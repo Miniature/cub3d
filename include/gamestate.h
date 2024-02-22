@@ -21,7 +21,7 @@
 
 # define DISPLAY_WIDTH 1680
 # define DISPLAY_HEIGHT 960
-# define TEXTURE_RESOLUTION 32
+# define TEXTURE_RESOLUTION 128
 
 typedef struct s_gamestate_entities
 {
@@ -43,6 +43,9 @@ typedef struct s_gamestate
 	t_gamestate_terrains	terrain_sprites;
 	t_mlx_image				terrain;
 	t_mlx_image				background_img;
+	t_mlx_image				wall_img[4];//NORTH>SOUTH>EAST>WEST
+	int						floor_colour;
+	int						ceiling_colour;
 	t_slmap					map;
 }	t_gamestate;
 
