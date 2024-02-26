@@ -16,13 +16,12 @@
 void	b_img_pix_put(t_gamewindow *gw, int x, int y, int colour)
 {
 	char	*pixel;
-	//gw->game.background_img.
 	if (y < 0 || y > gw->display_height - 1 || x < 0
 		|| x > gw->display_width - 1)
 		return ;
-	pixel = (gw->game.background_img.addr
-			+ (y * gw->game.background_img.line_len
-				+ x * (gw->game.background_img.bpp / 8)));
+	pixel = (gw->game.raycast_img.addr
+			+ (y * gw->game.raycast_img.line_len
+				+ x * (gw->game.raycast_img.bpp / 8)));
 	*(int *)pixel = colour;
 }
 
