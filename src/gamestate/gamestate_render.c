@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:51:22 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:58:45 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:06:46 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "gamestate.h"
 #include "entity.h"
 #include "sprite.h"
+#include "render.h"
 
 void	gamestate_render_terrain(t_gamestate state, t_mlx_window win)
 {
@@ -41,6 +42,8 @@ int	gamestate_render(t_gamewindow *gw)
 	t_entity	*entity;
 
 	gamestate_render_terrain(gw->game, gw->win);
+	render_raycasting(gw);//running before gamestate_render_terrain, causes visual tearing but allows view of map
+	gamestate_render_terrain(gw->game, gw->win);
 	entity_list = gw->game.entities.collectibles;
 	while (NULL != entity_list)
 	{
@@ -57,6 +60,6 @@ int	gamestate_render(t_gamewindow *gw)
 	}
 	entity_draw(*gw->game.entities.exit, gw->win);
 	entity_draw(*gw->game.entities.player, gw->win);
-	gamestate_render_movestr(gw);
+	//gamestate_render_movestr(gw);
 	return (0);
 }

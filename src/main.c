@@ -20,6 +20,7 @@
 #include "slmap.h"
 #include "gamestate.h"
 #include "entity.h"
+#include "render.h"
 
 int	on_key(int keycode, t_gamewindow *gw);
 int	run_turn(t_gamewindow *gw);
@@ -44,14 +45,15 @@ int	main(int argc, char **argv)
 
 	if (2 != argc)
 		error("incorrect args (expected only path to map)");
-
 	rsc_path = get_rsc_path(argv[0]);
 	gw.game.map = slmap_load(argv[1]);
 	gw.win.mlx = mlx_init();
-	gw.win.win = mlx_new_window(gw.win.mlx, (gw.game.map.width * 32) + 640,
-			(gw.game.map.height * 32) + 480, "so_long");
-
+	gw.display_width = DISPLAY_WIDTH;
+	gw.display_height = DISPLAY_HEIGHT;
+	gw.win.win = mlx_new_window(gw.win.mlx, (gw.display_width),
+			(gw.display_height), "Cub3d");
 	gw.game = gamestate_init(gw.win, gw.game.map, rsc_path);
+	gw.p = raycasting_perspective_init();
 	gamestate_render(&gw);
 	mlx_hook(gw.win.win, 17, 0, sl_close, &gw);
 	mlx_key_hook(gw.win.win, on_key, &gw);

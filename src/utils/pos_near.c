@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pos_rotate.c                                       :+:      :+:    :+:   */
+/*   pos_near.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 15:44:13 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 14:52:04 by wdavey           ###   ########.fr       */
+/*   Created: 2024/02/26 15:55:12 by wdavey            #+#    #+#             */
+/*   Updated: 2024/02/26 15:57:52 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <math.h>
-
 #include "utils.h"
 
-t_pos	pos_rotate(t_pos pos, float angle)
+#include <stdbool.h>
+#include <math.h>
+
+bool	pos_near(t_pos a, t_pos b, float max_distance)
 {
-	return ((t_pos){
-		pos.x * cos(angle) + pos.y * sin(angle),
-		pos.y * cos(angle) - pos.x * sin(angle)
-	});
+	return (pow(fabs(a.x - b.x), 2) + pow(fabs(a.y - b.y), 2)
+		< pow(max_distance, 2));
 }

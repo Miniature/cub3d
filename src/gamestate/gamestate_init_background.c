@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   slmap_get_block.c                                  :+:      :+:    :+:   */
+/*   gamestate_init_background.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ihogben <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 14:03:38 by ihogben           #+#    #+#             */
-/*   Updated: 2024/02/26 15:31:42 by wdavey           ###   ########.fr       */
+/*   Created: 2024/02/14 16:35:54 by ihogben           #+#    #+#             */
+/*   Updated: 2024/02/14 16:35:57 by ihogben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "slmap.h"
-
 #include "libft.h"
-#include <stdlib.h>
 
-//takes an x and y input and returns the map data at that position
-char	slmap_get_block(t_slmap map, size_t y, size_t x)
+#include "mlxw.h"
+#include "slmap.h"
+#include "sprite.h"
+#include "gamestate.h"
+
+t_mlx_image	gamestate_init_background(t_mlx_window window, int w, int h)
 {
-	if (y >= map.height || x >= (size_t)ft_strlen(map.raw[y]))
-		return ('1');
-	return (map.raw[y][x]);
+	t_mlx_image	image;
+
+	image = mlxw_new_image(window.mlx, w, h);
+	return (image);
 }

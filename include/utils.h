@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:54:30 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:48:49 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:55:01 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pos
 
 t_pos	pos_new(float x, float y);
 bool	pos_equal(t_pos a, t_pos b);
+bool	pos_near(t_pos a, t_pos b, float max_distance);
 t_pos	pos_add(t_pos a, t_pos b);
 t_pos	pos_rotate(t_pos pos, float angle);
 

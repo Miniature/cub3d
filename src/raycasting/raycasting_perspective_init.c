@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pos_rotate.c                                       :+:      :+:    :+:   */
+/*   raycasting_perspective_init.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ihogben <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 15:44:13 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 14:52:04 by wdavey           ###   ########.fr       */
+/*   Created: 2024/02/14 13:52:32 by ihogben           #+#    #+#             */
+/*   Updated: 2024/02/14 13:52:33 by ihogben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <math.h>
+#include "raycasting.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "utils.h"
-
-t_pos	pos_rotate(t_pos pos, float angle)
+t_gamestate_perspective	*raycasting_perspective_init(void)
 {
-	return ((t_pos){
-		pos.x * cos(angle) + pos.y * sin(angle),
-		pos.y * cos(angle) - pos.x * sin(angle)
-	});
+	t_gamestate_perspective	*p;
+
+	p = (t_gamestate_perspective *)malloc(sizeof(t_gamestate_perspective));
+	return (p);
 }

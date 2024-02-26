@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:30:35 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:02:42 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	handle_collisions_collectibles(t_gamestate *state)
 	entity = &(state->entities.collectibles);
 	while (NULL != *entity)
 	{
-		if (pos_equal(state->entities.player->pos,
-				((t_entity *)(*entity)->content)->pos))
+		if (pos_near(state->entities.player->pos,
+				((t_entity *)(*entity)->content)->pos, 0.2f))
 		{
 			free((*entity)->content);
 			temp = *entity;
@@ -55,12 +55,12 @@ bool	handle_collisions(t_gamestate *state)
 	entity = state->entities.patrols;
 	while (NULL != entity)
 	{
-		if (pos_equal(state->entities.player->pos,
-				((t_entity *)(entity->content))->pos))
+		if (pos_near(state->entities.player->pos,
+				((t_entity *)(entity->content))->pos, 0.2f))
 			return (true);
 		entity = entity->next;
 	}
-	if (pos_equal(state->entities.player->pos, state->entities.exit->pos)
+	if (pos_near(state->entities.player->pos, state->entities.exit->pos, 0.2f)
 		&& NULL == state->entities.collectibles)
 		return (true);
 	return (false);
@@ -68,5 +68,7 @@ bool	handle_collisions(t_gamestate *state)
 
 int	run_turn(t_gamewindow *gw)
 {
+	if (handle_collisions(&(gw->game)))
+		;
 	return (gamestate_render(gw));
 }

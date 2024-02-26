@@ -27,6 +27,10 @@ typedef struct s_mlx_window
 typedef struct s_mlx_image
 {
 	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 	int		w;
 	int		h;
 }	t_mlx_image;
