@@ -70,7 +70,7 @@ int	on_key(int keycode, t_gamewindow *gw)
 		{
 			player_move(gw->game.entities.player,
 				pos_rotate(keycode_to_movement(keycode),
-					-gw->game.entities.player->facing));
+					gw->game.entities.player->facing));
 		}
 	}
 	return (0);
