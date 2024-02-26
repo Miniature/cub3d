@@ -41,6 +41,7 @@ int	gamestate_render(t_gamewindow *gw)
 	t_list		*entity_list;
 	t_entity	*entity;
 
+	gamestate_render_terrain(gw->game, gw->win);
 	render_raycasting(gw);//running before gamestate_render_terrain, causes visual tearing but allows view of map
 	gamestate_render_terrain(gw->game, gw->win);
 	entity_list = gw->game.entities.collectibles;

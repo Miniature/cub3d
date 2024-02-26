@@ -9,5 +9,4 @@
 
 void	raycasting(t_gamewindow *gw);
 
-
 #endif

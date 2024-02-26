@@ -70,7 +70,6 @@ typedef struct s_gamestate_pespective
 	double	plane_x;
 	double	plane_y;
 
-
 	int		column_start;
 	int		column_end;
 	double	step;
