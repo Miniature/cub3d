@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:28:57 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 14:37:21 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:39:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ float	keycode_to_rotation(int keycode)
 	return (0.0f);
 }
 
+static bool	is_valid_position(t_slmap map, t_pos pos)
+{
+	return (WALL_CHAR != slmap_get_block(map, round(pos.y), round(pos.x)));
+}
+
 int	on_key(int keycode, t_gamewindow *gw)
 {
 	t_pos	mov;
@@ -64,9 +69,9 @@ int	on_key(int keycode, t_gamewindow *gw)
 	if (!pos_equal(pos_new(0, 0), mov))
 	{
 		player_pos = gw->game.entities.player->pos;
-		if (WALL_CHAR != gw->game.map.raw
-			[(int)round(pos_add(player_pos, mov).y)]
-			[(int)round(pos_add(player_pos, mov).x)])
+		if (is_valid_position(gw->game.map,
+				pos_add(player_pos, pos_rotate(keycode_to_movement(keycode),
+						gw->game.entities.player->facing))))
 		{
 			player_move(gw->game.entities.player,
 				pos_rotate(keycode_to_movement(keycode),
