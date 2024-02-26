@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:51:22 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 12:58:45 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:06:46 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	gamestate_render(t_gamewindow *gw)
 	}
 	entity_draw(*gw->game.entities.exit, gw->win);
 	entity_draw(*gw->game.entities.player, gw->win);
-	gamestate_render_movestr(gw);
+	//gamestate_render_movestr(gw);
 	return (0);
 }
