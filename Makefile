@@ -42,6 +42,7 @@ FILES:=\
 	sprite/sprite_name_from_e_id\
 	utils/pos_add\
 	utils/pos_equal\
+	utils/pos_near\
 	utils/pos_new\
 	utils/pos_rotate\
 	render/render_draw\
@@ -52,9 +53,6 @@ FILES:=\
 	main\
 
 BONUS:=\
-	entity/e_id_from_char\
-	game_logic/patrol_move\
-	sprite/sprite_draw\
 
 SRC_DIR:=src
 OBJ_DIR:=obj
