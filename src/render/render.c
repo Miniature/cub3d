@@ -52,6 +52,6 @@ int	render_raycasting(t_gamewindow *gw)
 {
 	render_background(gw);
 	raycasting(gw);
-	mlx_put_image_to_window(gw->win.mlx, gw->win.win, gw->game.background_img.img, 0, 0);
+	mlx_put_image_to_window(gw->win.mlx, gw->win.win, gw->game.raycast_img.img, 0, 0);
 	return (0);
 }

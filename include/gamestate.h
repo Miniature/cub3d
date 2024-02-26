@@ -43,6 +43,7 @@ typedef struct s_gamestate
 	t_gamestate_terrains	terrain_sprites;
 	t_mlx_image				terrain;
 	t_mlx_image				background_img;
+	t_mlx_image				raycast_img;
 	t_mlx_image				wall_img[4];//NORTH>SOUTH>EAST>WEST
 	int						floor_colour;
 	int						ceiling_colour;
