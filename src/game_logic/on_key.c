@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:28:57 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:55:04 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 14:37:21 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	on_key(int keycode, t_gamewindow *gw)
 		{
 			player_move(gw->game.entities.player,
 				pos_rotate(keycode_to_movement(keycode),
-					gw->game.entities.player->facing));
+					-gw->game.entities.player->facing));
 		}
 	}
 	return (0);
