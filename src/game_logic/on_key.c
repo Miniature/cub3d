@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:28:57 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 15:39:33 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/02/26 17:04:08 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,17 @@ float	keycode_to_rotation(int keycode)
 	return (0.0f);
 }
 
-static bool	is_valid_position(t_slmap map, t_pos pos)
+static bool	is_valid_move(t_slmap map, t_pos start, t_pos end)
 {
-	return (WALL_CHAR != slmap_get_block(map, round(pos.y), round(pos.x)));
+	if (round(start.x) != round(end.x) && round(start.y) != round(end.x))
+	{
+		if (WALL_CHAR
+			== slmap_get_block(map, (int)round(start.y), (int)round(end.x))
+			&& WALL_CHAR
+			== slmap_get_block(map, (int)round(start.x), (int)round(end.y)))
+			return (false);
+	}
+	return (WALL_CHAR != slmap_get_block(map, round(end.y), round(end.x)));
 }
 
 int	on_key(int keycode, t_gamewindow *gw)
@@ -69,7 +77,7 @@ int	on_key(int keycode, t_gamewindow *gw)
 	if (!pos_equal(pos_new(0, 0), mov))
 	{
 		player_pos = gw->game.entities.player->pos;
-		if (is_valid_position(gw->game.map,
+		if (is_valid_move(gw->game.map, player_pos,
 				pos_add(player_pos, pos_rotate(keycode_to_movement(keycode),
 						gw->game.entities.player->facing))))
 		{

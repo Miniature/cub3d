@@ -28,6 +28,7 @@ FILES:=\
 	gamestate/gamestate_init_background\
 	gamestate/gamestate_init\
 	gamestate/gamestate_render\
+	gamestate/map_enclosed\
 	map/slmap_delete\
 	map/slmap_load\
 	map/slmap_get_block\
@@ -43,6 +44,7 @@ FILES:=\
 	sprite/sprite_load\
 	sprite/sprite_draw\
 	sprite/sprite_name_from_e_id\
+	utils/error\
 	utils/pos_add\
 	utils/pos_equal\
 	utils/pos_near\
