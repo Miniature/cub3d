@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 17:20:22 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 19:19:24 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 19:34:51 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	str_to_mapimgdefi(char *str)
 
 static t_colour	str_to_colour(char *str)
 {
-	t_colour	rv;
 	size_t		iii;
 	size_t		parts;
 
@@ -54,10 +53,8 @@ static t_colour	str_to_colour(char *str)
 		iii++;
 	if (str[iii] != '\0')
 		error("invalid colour");
-	rv.r = ft_atoi(str);
-	rv.g = ft_atoi(ft_strchr(str, ','));
-	rv.b = ft_atoi(ft_strrchr(str, ','));
-	return (rv);
+	return (mlxw_rgb(ft_atoi(str), ft_atoi(ft_strchr(str, ',') + 1),
+			ft_atoi(ft_strrchr(str, ',') + 1)));
 }
 
 size_t	gamestate_init_config(t_gamestate *state, void *mlx, char *rsc_path)
