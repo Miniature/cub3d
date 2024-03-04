@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:34:15 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 16:02:03 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 17:16:29 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_gamestate
 	t_mlx_image				background_img;
 	t_mlx_image				raycast_img;
 	t_mlx_image				wall_img[4];//NORTH>SOUTH>EAST>WEST
-	int						floor_colour;
-	int						ceiling_colour;
+	t_colour				floor_colour;
+	t_colour				ceiling_colour;
 	t_slmap					map;
 }	t_gamestate;
 
