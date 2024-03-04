@@ -7,7 +7,7 @@ CFLAGS+=-Wall -Wextra -Werror -c -MMD -MP
 #CFLAGS+=-MMD -MP
 export CFLAGS
 
-NAME:=cub3d
+NAME:=cub3D
 
 DEBUG_ARGS:=\
 	rsc/map/ex1.cub\
