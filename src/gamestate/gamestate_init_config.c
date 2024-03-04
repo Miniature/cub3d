@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 17:20:22 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 19:34:51 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 19:56:08 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,28 @@ static t_colour	str_to_colour(char *str)
 			ft_atoi(ft_strrchr(str, ',') + 1)));
 }
 
+static void	gamestate_init_config_load(t_gamestate *state, void *mlx,
+		char *rsc_path, char **mapimgdefstr)
+{
+	if (!(mapimgdefstr[0] && mapimgdefstr[1] && mapimgdefstr[2]
+			&& mapimgdefstr[3]))
+		error("missing wall definition");
+	if (!(mapimgdefstr[4]))
+		error("missing floor definition");
+	if (!(mapimgdefstr[5]))
+		error("missing ceiling definition");
+	state->wall_img[NORTH]
+		= sprite_load(mlx, rsc_path, mapimgdefstr[0] + 3).frames[0];
+	state->wall_img[SOUTH]
+		= sprite_load(mlx, rsc_path, mapimgdefstr[1] + 3).frames[0];
+	state->wall_img[EAST]
+		= sprite_load(mlx, rsc_path, mapimgdefstr[2] + 3).frames[0];
+	state->wall_img[WEST]
+		= sprite_load(mlx, rsc_path, mapimgdefstr[3] + 3).frames[0];
+	state->floor_colour = str_to_colour(mapimgdefstr[4] + 2);
+	state->ceiling_colour = str_to_colour(mapimgdefstr[5] + 2);
+}
+
 size_t	gamestate_init_config(t_gamestate *state, void *mlx, char *rsc_path)
 {
 	size_t	iii;
@@ -78,24 +100,7 @@ size_t	gamestate_init_config(t_gamestate *state, void *mlx, char *rsc_path)
 			if (6 == found)
 				break ;
 		}
-		else if (ft_strchr(state->map.raw[iii], 'N')
-			|| ft_strchr(state->map.raw[iii], 'S')
-			|| ft_strchr(state->map.raw[iii], 'E')
-			|| ft_strchr(state->map.raw[iii], 'W'))
-			break ;
 	}
-	if (!(mapimgdefstr[0] && mapimgdefstr[1] && mapimgdefstr[2]
-			&& mapimgdefstr[3] && mapimgdefstr[4] && mapimgdefstr[5]))
-		error("missing terrain definition");
-	state->wall_img[NORTH]
-		= sprite_load(mlx, rsc_path, mapimgdefstr[0] + 3).frames[0];
-	state->wall_img[SOUTH]
-		= sprite_load(mlx, rsc_path, mapimgdefstr[1] + 3).frames[0];
-	state->wall_img[EAST]
-		= sprite_load(mlx, rsc_path, mapimgdefstr[2] + 3).frames[0];
-	state->wall_img[WEST]
-		= sprite_load(mlx, rsc_path, mapimgdefstr[3] + 3).frames[0];
-	state->floor_colour = str_to_colour(mapimgdefstr[4] + 2);
-	state->ceiling_colour = str_to_colour(mapimgdefstr[5] + 2);
+	gamestate_init_config_load(state, mlx, rsc_path, mapimgdefstr);
 	return (iii);
 }
