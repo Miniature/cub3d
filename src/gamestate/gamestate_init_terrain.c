@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:43:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 14:38:13 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 18:44:04 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_mlx_image	gamestate_init_terrain(t_mlx_window window,
 	terrain[0] = sprite_load(window.mlx, rsc_path, "floor.xpm");
 	while ((unsigned)p[1] < map.height)
 	{
-		if (ft_strlen(map.raw[p[1]]) != map.width)
-			error("map is not rectangular");
 		p[0] = 0;
 		while ((unsigned)p[0] < map.width)
 		{

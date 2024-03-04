@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:34:15 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 17:16:29 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 19:12:20 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define DISPLAY_WIDTH 1680
 # define DISPLAY_HEIGHT 960
-# define TEXTURE_RESOLUTION 128
+# define TEXTURE_RESOLUTION 32
 
 typedef struct s_gamestate_entities
 {

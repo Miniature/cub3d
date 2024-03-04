@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:30:06 by ihogben           #+#    #+#             */
-/*   Updated: 2024/03/04 17:18:21 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 18:37:50 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	render_background(t_gamewindow *gw)
 	int	x;
 	int	y;
 
-	gw->game.ceiling_colour = mlxw_rgb(0, 0, 0);//COMMENT OUT AFTER IMPLEMENTATION
-	gw->game.floor_colour = mlxw_rgb(150, 150, 150);
+	//gw->game.ceiling_colour = mlxw_rgb(0, 0, 0);//COMMENT OUT AFTER /IMPLEMENTATION
+	//gw->game.floor_colour = mlxw_rgb(150, 150, 150);
 	x = 0;
 	while (x < gw->display_width)
 	{

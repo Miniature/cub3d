@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 17:37:43 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 18:56:14 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_mlx_image				gamestate_init_terrain(t_mlx_window window,
 t_mlx_image				gamestate_init_background(t_mlx_window window,
 							int width, int height);
 t_gamestate_entities	gamestate_init_entities(t_mlx_window window,
-							t_slmap mapdata, char *rsc_path);
-void					gamestate_init_config(t_gamestate *state,
+							t_slmap mapdata, char *rsc_path, size_t start);
+size_t					gamestate_init_config(t_gamestate *state, void *mlx,
 							char *rsc_path);
 bool					valid_playarea(t_slmap map, t_pos origin);
 
@@ -81,15 +81,17 @@ bool	gamestate_is_valid(t_gamestate state)
 t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 {
 	t_gamestate	state;
+	size_t		config_lines;
 
 	state.terrain = gamestate_init_terrain(window, mapdata, rsc_path);
-	state.entities = gamestate_init_entities(window, mapdata, rsc_path);
 	state.background_img = gamestate_init_background(window, DISPLAY_WIDTH,
 			DISPLAY_HEIGHT);
 	state.raycast_img = gamestate_init_background(window, DISPLAY_WIDTH,
 			DISPLAY_HEIGHT);
 	state.map = mapdata;
-	gamestate_init_config(&state, rsc_path);
+	config_lines = gamestate_init_config(&state, window.mlx, rsc_path);
+	state.entities = gamestate_init_entities(window, mapdata, rsc_path,
+			config_lines);
 	state.terrain_sprites.wall
 		= sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");
 	state.terrain_sprites.floor
