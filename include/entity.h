@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 15:55:47 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 18:01:20 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ enum e_id
 {
 	NONE_ID = 0,
 	PLAYER_ID,
+	PLAYER_NORTH,
+	PLAYER_EAST,
+	PLAYER_SOUTH,
+	PLAYER_WEST,
 	PATROL_ID,
 	COLLECTIBLE_ID,
 	EXIT_ID,

@@ -6,11 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:27:44 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 11:15:06 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 18:06:59 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 
 #include "libft.h"
 
@@ -29,6 +30,29 @@ static	t_entity	entity_get_copy_patrol(void *mlx, char *rsc_path)
 	return (patrol);
 }
 
+static t_entity	entity_get_copy_player(void *mlx, char *rsc_path, enum e_id id)
+{
+	static t_entity	player;
+	static t_sprite	player_sprite;
+
+	if (NONE_ID == player.type)
+	{
+		player_sprite = sprite_load_player(mlx, rsc_path);
+		player.type = PLAYER_ID;
+		player.sprite = &player_sprite;
+		player.data = 0;
+	}
+	if (PLAYER_NORTH == id)
+		player.facing = 0;
+	if (PLAYER_EAST == id)
+		player.facing = M_PI_2 * 3;
+	if (PLAYER_SOUTH == id)
+		player.facing = M_PI;
+	if (PLAYER_WEST == id)
+		player.facing = M_PI_2;
+	return (player);
+}
+
 //does this count as lazy init?
 //shallow copy is wanted to avoid duplicating image data
 t_entity	*entity_get_copy(enum e_id id, void *mlx, char *rsc_path, t_pos pos)
@@ -41,15 +65,15 @@ t_entity	*entity_get_copy(enum e_id id, void *mlx, char *rsc_path, t_pos pos)
 		error("tried to get invalid entity");
 	if (NONE_ID == entities[id].type)
 	{
-		if (PATROL_ID == id)
+		if (PLAYER_NORTH == id || PLAYER_SOUTH == id
+			|| PLAYER_EAST == id || PLAYER_WEST == id)
+			entities[id] = entity_get_copy_player(mlx, rsc_path, id);
+		else if (PATROL_ID == id)
 			entities[id] = entity_get_copy_patrol(mlx, rsc_path);
 		else
 		{
-			if (PLAYER_ID == id)
-				sprites[id] = sprite_load_player(mlx, rsc_path);
-			else
-				sprites[id] = sprite_load(mlx, rsc_path,
-						sprite_name_from_eid(id));
+			sprites[id] = sprite_load(mlx, rsc_path,
+					sprite_name_from_eid(id));
 			entities[id] = entity_create(id, 0, 0, sprites + id);
 		}
 	}

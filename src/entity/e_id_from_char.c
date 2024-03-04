@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:28:12 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/04 13:36:56 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 17:47:55 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 
 enum e_id	e_id_from_char(char c)
 {
-	if (c == PLAYER_CHAR)
-		return (PLAYER_ID);
+	if (c == 'N')
+		return (PLAYER_NORTH);
+	if (c == 'S')
+		return (PLAYER_SOUTH);
+	if (c == 'E')
+		return (PLAYER_EAST);
+	if (c == 'W')
+		return (PLAYER_WEST);
 	if (c == COLLECTIBLE_CHAR)
 		return (COLLECTIBLE_ID);
 	if (c == EXIT_CHAR)
