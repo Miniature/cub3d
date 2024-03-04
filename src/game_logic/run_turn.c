@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 16:02:42 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 17:42:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ bool	handle_collisions(t_gamestate *state)
 			return (true);
 		entity = entity->next;
 	}
-	if (pos_near(state->entities.player->pos, state->entities.exit->pos, 0.2f)
-		&& NULL == state->entities.collectibles)
-		return (true);
+	//if (pos_near(state->entities.player->pos, state->entities.exit->pos, 0.2f)
+	//	&& NULL == state->entities.collectibles)
+	//	return (true);
 	return (false);
 }
 

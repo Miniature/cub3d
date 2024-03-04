@@ -26,6 +26,7 @@ FILES:=\
 	gamestate/gamestate_init_entities\
 	gamestate/gamestate_init_terrain\
 	gamestate/gamestate_init_background\
+	gamestate/gamestate_init_config\
 	gamestate/gamestate_init\
 	gamestate/gamestate_render\
 	gamestate/map_enclosed\
