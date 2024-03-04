@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 18:56:14 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/04 19:32:10 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,9 @@ t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 		= sprite_load(window.mlx, rsc_path, "floor.xpm");
 	if (false == gamestate_is_valid(state))
 		error("unknown error");
+	state.wall_img[NORTH] = state.terrain;
+	state.wall_img[SOUTH] = state.terrain;
+	state.wall_img[EAST] = state.terrain;
+	state.wall_img[WEST] = state.terrain;
 	return (state);
 }
