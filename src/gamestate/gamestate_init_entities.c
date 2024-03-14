@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:47:40 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 19:09:59 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/14 18:10:21 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ t_list	*entities_from_slmap(t_mlx_window window,
 						mapdata.raw[(int)round(p.y)][(int)round(p.x)]);
 				if (INVALID_ID == e_id)
 				{
-					printf("%i %i %i\n", (int)p.x, (int)p.y, e_id);
+					printf("%i %i %c %i\n", (int)p.x, (int)p.y,
+						mapdata.raw[(int)round(p.y)][(int)round(p.x)], e_id);
 					error("invalid character in map");
 				}
-				ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy(
-							e_id, window.mlx, rsc_path, pos_new(p.x, p.y))));
+				else if (NONE_ID != e_id)
+					ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy
+							(e_id, window.mlx, rsc_path, pos_new(p.x, p.y))));
 			}
 			p.x++;
 		}
