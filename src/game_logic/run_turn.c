@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:01:32 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 17:42:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:03:55 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,20 @@ bool	handle_collisions(t_gamestate *state)
 			return (true);
 		entity = entity->next;
 	}
-	//if (pos_near(state->entities.player->pos, state->entities.exit->pos, 0.2f)
-	//	&& NULL == state->entities.collectibles)
-	//	return (true);
 	return (false);
 }
 
 int	run_turn(t_gamewindow *gw)
 {
+	int	mouse_pos[2];
+
 	if (handle_collisions(&(gw->game)))
 		;
+	if (gw->using_mouse)
+	{
+		mlx_mouse_get_pos(gw->win.win, mouse_pos, mouse_pos + 1);
+		gw->game.entities.player->facing -= mouse_pos[0] * MOUSE_TURN_SPEED;
+		mlx_mouse_move(gw->win.win, 0, 0);
+	}
 	return (gamestate_render(gw));
 }

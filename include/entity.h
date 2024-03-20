@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:41:45 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 18:01:20 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:03:45 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "mlxw.h"
 # include "utils.h"
 # include "sprite.h"
+
+# define MOUSE_TURN_SPEED 0.01f
+# define MOVE_SPEED 0.2f
+# define KEY_TURN_SPEED 0.261799f
+
 
 //INVALID_ID must be the last entry and NONE_ID must be the 0th
 enum e_id

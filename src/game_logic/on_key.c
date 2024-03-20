@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:28:57 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/20 20:28:43 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:05:25 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 
 void	player_move(t_entity *player, t_pos move);
 int		sl_close(t_gamewindow *gw);
-
-#define MOVE_SPEED 0.1f * 2
-#define KEY_TURN_SPEED 0.261799f
 
 t_pos	keycode_to_movement(int keycode)
 {
@@ -64,6 +61,21 @@ static bool	is_valid_move(t_slmap map, t_pos start, t_pos end)
 	return (WALL_CHAR != slmap_get_block(map, round(end.y), round(end.x)));
 }
 
+static void	toggle_mouse(t_gamewindow *gw)
+{
+	if (gw->using_mouse)
+	{
+		mlx_mouse_show();
+		gw->using_mouse = false;
+	}
+	else
+	{
+		mlx_mouse_hide();
+		mlx_mouse_move(gw->win.win, 0, 0);
+		gw->using_mouse = true;
+	}
+}
+
 int	on_key(int keycode, t_gamewindow *gw)
 {
 	t_pos	mov;
@@ -71,6 +83,8 @@ int	on_key(int keycode, t_gamewindow *gw)
 
 	if (KEY_ESC == keycode)
 		sl_close(gw);
+	if (KEY_L == keycode)
+		toggle_mouse(gw);
 	if (0.0f != keycode_to_rotation(keycode))
 		gw->game.entities.player->facing += keycode_to_rotation(keycode);
 	mov = keycode_to_movement(keycode);

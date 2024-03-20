@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:34:15 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 19:12:20 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 20:52:29 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_gamewindow
 	int						display_width; //window size
 	int						display_height;
 	int						render_scale;
+	bool					using_mouse;
 }	t_gamewindow;
 
 t_gamestate	gamestate_init(t_mlx_window window,
