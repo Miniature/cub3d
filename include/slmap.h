@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:26:20 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 15:19:48 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:41:58 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ t_slmap	slmap_load(char *map_path);
 void	slmap_delete(t_slmap slmap);
 void	slmap_free(t_slmap *slmap);
 
-char	slmap_get_block(t_slmap slmap, size_t x, size_t y);
+char	slmap_get_block(t_slmap slmap, size_t y, size_t x);
 #endif

@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:43:28 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 16:02:28 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 20:08:08 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ typedef union colour
 	int	c;
 	struct
 	{
-		unsigned char	a;
-		unsigned char	r;
-		unsigned char	g;
 		unsigned char	b;
+		unsigned char	g;
+		unsigned char	r;
+		unsigned char	a;
 	};
 }	t_colour;
 
@@ -59,6 +59,8 @@ t_mlx_image		mlxw_load_xpm(void *mlx, char *name);
 void			mlxw_destroy_image(t_mlx_image img, void *mlx);
 
 t_mlx_image		mlxw_image_overlay(t_mlx_image dst, t_mlx_image src, t_pos p);
+t_mlx_image		mlxw_subimage(void *mlx,
+					t_mlx_image src, t_pos origin, t_pos size);
 
 int				mlxw_draw(t_mlx_window win, t_mlx_image image, t_pos pos);
 void			mlxw_draw_string(t_mlx_window win, char *str, t_pos pos,

@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:28:57 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 17:04:08 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 20:28:43 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 void	player_move(t_entity *player, t_pos move);
 int		sl_close(t_gamewindow *gw);
 
-#define MOVE_SPEED 0.1f
+#define MOVE_SPEED 0.1f * 2
 #define KEY_TURN_SPEED 0.261799f
 
 t_pos	keycode_to_movement(int keycode)

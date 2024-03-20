@@ -28,6 +28,7 @@ FILES:=\
 	gamestate/gamestate_init_background\
 	gamestate/gamestate_init_config\
 	gamestate/gamestate_init\
+	gamestate/gamestate_render_minimap\
 	gamestate/gamestate_render\
 	gamestate/map_enclosed\
 	map/slmap_delete\
@@ -41,6 +42,7 @@ FILES:=\
 	mlxw/mlxw_load_png\
 	mlxw/mlxw_load_xpm\
 	mlxw/mlxw_new_image\
+	mlxw/mlxw_subimage\
 	sprite/sprite_delete\
 	sprite/sprite_load\
 	sprite/sprite_draw\
@@ -48,6 +50,7 @@ FILES:=\
 	utils/error\
 	utils/pos_add\
 	utils/pos_equal\
+	utils/pos_mult\
 	utils/pos_near\
 	utils/pos_new\
 	utils/pos_rotate\

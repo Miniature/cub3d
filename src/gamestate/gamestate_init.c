@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/04 19:48:39 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:51:12 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ t_gamestate	gamestate_init(t_mlx_window window, t_slmap mapdata, char *rsc_path)
 	size_t		config_lines;
 
 	state.map = mapdata;
-	state.background_img = gamestate_init_background(window, DISPLAY_WIDTH,
-			DISPLAY_HEIGHT);
+	//state.background_img = gamestate_init_background(window, DISPLAY_WIDTH,
+	//		DISPLAY_HEIGHT);
 	state.raycast_img = gamestate_init_background(window, DISPLAY_WIDTH,
 			DISPLAY_HEIGHT);
 	config_lines = gamestate_init_config(&state, window.mlx, rsc_path);
 	state.entities = gamestate_init_entities(window, mapdata, rsc_path,
 			config_lines + 1);
-	state.terrain = gamestate_init_terrain(window, mapdata, rsc_path,
-			0);
+	//state.terrain = gamestate_init_terrain(window, mapdata, rsc_path,
+	//		0);
 	state.terrain_sprites.wall
 		= sprite_load(window.mlx, rsc_path, "wall_fallback.xpm");
 	state.terrain_sprites.floor

@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:30:06 by ihogben           #+#    #+#             */
-/*   Updated: 2024/03/04 18:37:50 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 20:21:37 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int	render_raycasting(t_gamewindow *gw)
 {
 	render_background(gw);
 	raycasting(gw);
-	mlx_put_image_to_window(gw->win.mlx, gw->win.win, gw->game.raycast_img.img, 0, 0);
 	return (0);
 }
