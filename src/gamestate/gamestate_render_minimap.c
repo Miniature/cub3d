@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:24:10 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/20 20:36:16 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:27:22 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,29 @@ static void	minimap_snapshot(t_gamewindow *gw, t_mlx_image minimap)
 	}
 }
 
+static t_mlx_image	current_player_image(t_gamewindow *gw)
+{
+	static size_t	frame_count;
+	t_sprite		*sprite;
+	size_t			cycle_frames;
+	size_t			iii;
+
+	sprite = gw->game.entities.player->sprite;
+	iii = -1;
+	cycle_frames = 0;
+	while (++iii < sprite->frame_count)
+	{
+		cycle_frames += sprite->frame_dur[iii];
+		if (frame_count < cycle_frames)
+		{
+			frame_count++;
+			return (sprite->frames[iii]);
+		}
+	}
+	frame_count = 0;
+	return (sprite->frames[0]);
+}
+
 void	gamestate_render_minimap(t_gamewindow *gw)
 {
 	t_mlx_image	minimap;
@@ -53,7 +76,7 @@ void	gamestate_render_minimap(t_gamewindow *gw)
 			gw->game.terrain_sprites.floor.frames[0].w * 12,
 			gw->game.terrain_sprites.floor.frames[0].h * 6);
 	minimap_snapshot(gw, minimap);
-	mlxw_image_overlay(minimap, gw->game.entities.player->sprite->frames[0],
+	mlxw_image_overlay(minimap, current_player_image(gw),
 		pos_new(64 + fmod(gw->game.entities.player->pos.x, 1) * 32,
 			56 + fmod(gw->game.entities.player->pos.y, 1) * 32));
 	mlxw_image_overlay(gw->game.raycast_img, minimap, pos_new(0, 0));

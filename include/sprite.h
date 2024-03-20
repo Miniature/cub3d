@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:45:33 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/01 16:02:40 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:27:45 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "mlxw.h"
 # include "utils.h"
 
-# define PLAYER_SPRITE_CYCLE_TIME 500000 //(CLOCKS_PER_SEC / 2)
+# define PLAYER_SPRITE_CYCLE_TIME 20
 
 typedef struct s_sprite
 {
