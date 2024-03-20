@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:28:12 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/14 18:09:44 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:11:03 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum e_id	e_id_from_char(char c)
 		return (COLLECTIBLE_ID);
 	if (c == EXIT_CHAR)
 		return (EXIT_ID);
-	if (c == ' ')
+	if (c == ' ' || c == WALL_CHAR || c == FLOOR_CHAR)
 		return (NONE_ID);
 	return (INVALID_ID);
 }

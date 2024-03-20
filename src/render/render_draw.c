@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_draw.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihogben <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:52:32 by ihogben           #+#    #+#             */
-/*   Updated: 2024/02/14 13:52:33 by ihogben          ###   ########.fr       */
+/*   Updated: 2024/03/20 21:08:24 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	b_img_pix_put(t_gamewindow *gw, int x, int y, int colour)
 {
 	char	*pixel;
+
 	if (y < 0 || y > gw->display_height - 1 || x < 0
 		|| x > gw->display_width - 1)
 		return ;
@@ -25,8 +26,8 @@ void	b_img_pix_put(t_gamewindow *gw, int x, int y, int colour)
 	*(int *)pixel = colour;
 }
 
-void	calculate_column
-	(t_gamewindow *gw, int *line_height, int *start, int *end)
+void	calculate_column(t_gamewindow *gw, int *line_height,
+	int *start, int *end)
 {
 	*line_height = gw->display_height / gw->p->persp_wall_dist;
 	*start = -*line_height / 2 + gw->display_height / 2;
@@ -76,13 +77,13 @@ void	draw_column(t_gamewindow *gw, int x)
 	{
 		gw->p->tex_y = (int)gw->p->tex_pos & (TEXTURE_RESOLUTION - 1);
 		gw->p->tex_pos += gw->p->step;
-		if (gw->p->wall_side == 1 && gw->p->ray_dir_y < 0)//SOUTH
+		if (gw->p->wall_side == 1 && gw->p->ray_dir_y < 0)
 			draw(gw, x, 2);
-		else if (gw->p->wall_side == 1 && gw->p->ray_dir_y > 0)//NORTH
+		else if (gw->p->wall_side == 1 && gw->p->ray_dir_y > 0)
 			draw(gw, x, 0);
-		else if (gw->p->wall_side == 0 && gw->p->ray_dir_x < 0)//EAST
+		else if (gw->p->wall_side == 0 && gw->p->ray_dir_x < 0)
 			draw(gw, x, 1);
-		else if (gw->p->wall_side == 0 && gw->p->ray_dir_x > 0)//WEST
+		else if (gw->p->wall_side == 0 && gw->p->ray_dir_x > 0)
 			draw(gw, x, 3);
 		gw->p->column_start++;
 	}

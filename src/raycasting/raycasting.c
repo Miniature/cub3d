@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihogben <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:52:32 by ihogben           #+#    #+#             */
-/*   Updated: 2024/02/14 13:52:33 by ihogben          ###   ########.fr       */
+/*   Updated: 2024/03/20 21:07:12 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	raycasting(t_gamewindow *gw)
 	int	x;
 
 	x = 0;
-	while (x < gw->display_width) //could add render scale later
+	while (x < gw->display_width)
 	{
 		raycasting_init(gw, x);
 		get_delta_dist(gw->p);

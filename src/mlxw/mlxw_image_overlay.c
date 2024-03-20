@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:05:55 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/20 20:20:23 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:12:29 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	image_memcpy(void *d, void *s, size_t w)
 	t_colour	si;
 	t_colour	di;
 	t_colour	f;
-	float		adj_alpha;
 
 	iii = 0;
 	while (iii < w)
@@ -77,16 +76,8 @@ static void	image_memcpy(void *d, void *s, size_t w)
 		di = *(t_colour *)(d + iii);
 		if (si.a == 255)
 			f = di;
-		else if (si.a == 0)
-			f = si;
 		else
-		{
-			adj_alpha = ((255 - di.a) / 255.0f) * ((255 - si.a) / 255.0f);
-			f.a = si.a + di.a * adj_alpha;
-			f.r = si.r + di.r * adj_alpha;
-			f.g = si.g + di.g * adj_alpha;
-			f.b = si.b + di.b * adj_alpha;
-		}
+			f = si;
 		*(t_colour *)(d + iii) = f;
 		iii += 4;
 	}

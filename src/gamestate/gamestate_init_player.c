@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 06:46:13 by wdavey            #+#    #+#             */
-/*   Updated: 2024/02/26 16:10:44 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:09:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 static t_entity	*player_from_line(char *line)
 {
 	t_entity	*player;
-
 
 	return (NULL);
 }

@@ -6,18 +6,17 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 09:47:40 by wdavey            #+#    #+#             */
-/*   Updated: 2024/03/14 18:10:21 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:12:05 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "gamestate.h"
 #include "entity.h"
 
-
-#include <stdio.h>
 t_list	*entities_from_slmap(t_mlx_window window,
 		t_slmap mapdata, char *rsc_path, size_t start)
 {
@@ -26,30 +25,24 @@ t_list	*entities_from_slmap(t_mlx_window window,
 	enum e_id	e_id;
 
 	entities = NULL;
-	p.y = start + 1;
-	while (p.y < mapdata.height)
+	p.y = start;
+	while (++p.y < mapdata.height)
 	{
-		p.x = 0;
-		while (p.x < ft_strlen(mapdata.raw[(int)p.y]))
+		p.x = -1;
+		while (++p.x < ft_strlen(mapdata.raw[(int)p.y]))
 		{
-			if (!(mapdata.raw[(int)round(p.y)][(int)round(p.x)] == WALL_CHAR
-				|| mapdata.raw[(int)round(p.y)][(int)round(p.x)] == FLOOR_CHAR))
+			e_id = e_id_from_char(
+					mapdata.raw[(int)round(p.y)][(int)round(p.x)]);
+			if (INVALID_ID == e_id)
 			{
-				e_id = e_id_from_char(
-						mapdata.raw[(int)round(p.y)][(int)round(p.x)]);
-				if (INVALID_ID == e_id)
-				{
-					printf("%i %i %c %i\n", (int)p.x, (int)p.y,
-						mapdata.raw[(int)round(p.y)][(int)round(p.x)], e_id);
-					error("invalid character in map");
-				}
-				else if (NONE_ID != e_id)
-					ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy
-							(e_id, window.mlx, rsc_path, pos_new(p.x, p.y))));
+				printf("%i %i %c %i\n", (int)p.x, (int)p.y,
+					mapdata.raw[(int)round(p.y)][(int)round(p.x)], e_id);
+				error("invalid character in map");
 			}
-			p.x++;
+			else if (NONE_ID != e_id)
+				ft_lstadd_back(&(entities), ft_lstnew(entity_get_copy
+						(e_id, window.mlx, rsc_path, pos_new(p.x, p.y))));
 		}
-		p.y++;
 	}
 	return (entities);
 }
